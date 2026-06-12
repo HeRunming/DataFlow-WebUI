@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{p{0.28\linewidth}p{0.32\linewidth}p{0.30\linewidth}}
+\toprule
+Setting & Expected failure mode & Measurement \\
+\midrule
+No MCP grounding & hallucinated or stale operators & -- \\
+No skills & invalid field flow or wrong op & -- \\
+No DAG sync & user cannot inspect workflow & -- \\
+No execution gating & self-initiated runs & -- \\
+\bottomrule
+\end{tabular}
+\caption{Ablation: removing each harness component. Baseline is \textsc{DataFlow-Agent} full.}
+\label{tab:ablation}
+\end{table}

@@ -1,0 +1,2690 @@
+{
+  "by_method_primary": {
+    "dataflow_agent": {
+      "wrong_operator_choice": 36,
+      "context_overflow": 6,
+      "execution_error": 14,
+      "success": 5,
+      "ui_disconnect": 3,
+      "operator_hallucination": 2,
+      "unclassified": 4
+    },
+    "df_agent_v2": {
+      "context_overflow": 13,
+      "wrong_operator_choice": 22,
+      "execution_error": 15,
+      "success": 4,
+      "unclassified": 5,
+      "ui_disconnect": 1
+    },
+    "direct_cc": {
+      "ui_disconnect": 68
+    },
+    "mcp_only": {
+      "wrong_operator_choice": 39,
+      "unclassified": 9,
+      "execution_error": 12,
+      "success": 5,
+      "partial_success": 1,
+      "context_overflow": 4
+    }
+  },
+  "by_task_primary": {
+    "1a_qa_basic": {
+      "wrong_operator_choice": 13,
+      "context_overflow": 1,
+      "ui_disconnect": 5,
+      "unclassified": 1
+    },
+    "1b_qa_with_filter": {
+      "wrong_operator_choice": 13,
+      "context_overflow": 2,
+      "ui_disconnect": 5
+    },
+    "2a_single_language_sentiment": {
+      "wrong_operator_choice": 5,
+      "execution_error": 4,
+      "success": 4,
+      "context_overflow": 2,
+      "ui_disconnect": 5
+    },
+    "2b_review_governance": {
+      "wrong_operator_choice": 2,
+      "execution_error": 9,
+      "context_overflow": 2,
+      "ui_disconnect": 5,
+      "partial_success": 1,
+      "success": 1
+    },
+    "3a_long_doc_summary": {
+      "context_overflow": 5,
+      "execution_error": 8,
+      "ui_disconnect": 7
+    },
+    "3a_url_to_chunks": {
+      "wrong_operator_choice": 10,
+      "ui_disconnect": 5
+    },
+    "3b_pdf_to_qa": {
+      "wrong_operator_choice": 10,
+      "ui_disconnect": 4
+    },
+    "3b_text_to_qa_chain": {
+      "context_overflow": 4,
+      "wrong_operator_choice": 11,
+      "ui_disconnect": 4
+    },
+    "4a_score_and_filter": {
+      "wrong_operator_choice": 11,
+      "execution_error": 3,
+      "context_overflow": 1,
+      "ui_disconnect": 5
+    },
+    "4b_multidim_scoring": {
+      "wrong_operator_choice": 5,
+      "execution_error": 7,
+      "operator_hallucination": 1,
+      "success": 2,
+      "ui_disconnect": 5
+    },
+    "5a_field_rename": {
+      "unclassified": 8,
+      "operator_hallucination": 1,
+      "context_overflow": 3,
+      "ui_disconnect": 6,
+      "success": 2
+    },
+    "5b_nested_flatten": {
+      "wrong_operator_choice": 5,
+      "unclassified": 9,
+      "context_overflow": 1,
+      "ui_disconnect": 5
+    },
+    "6a_length_filter": {
+      "execution_error": 10,
+      "success": 5,
+      "ui_disconnect": 5
+    },
+    "6b_llm_semantic_filter": {
+      "wrong_operator_choice": 12,
+      "context_overflow": 2,
+      "ui_disconnect": 6
+    }
+  },
+  "details": [
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "partial_success",
+      "all_labels": [
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_url_to_chunks",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_pdf_to_qa",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "operator_hallucination",
+      "all_labels": [
+        "operator_hallucination",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "operator_hallucination",
+      "all_labels": [
+        "operator_hallucination",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 4,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "direct_cc",
+      "rep": 0,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "direct_cc",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "direct_cc",
+      "rep": 2,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "direct_cc",
+      "rep": 3,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "direct_cc",
+      "rep": 4,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 3,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 4,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    }
+  ]
+}

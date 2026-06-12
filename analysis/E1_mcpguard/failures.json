@@ -1,0 +1,1349 @@
+{
+  "by_method_primary": {
+    "dataflow_agent": {
+      "success": 9,
+      "execution_error": 20,
+      "wrong_operator_choice": 2,
+      "unclassified": 5
+    },
+    "df_agent_slim": {
+      "success": 11,
+      "execution_error": 19,
+      "wrong_operator_choice": 1,
+      "unclassified": 5
+    },
+    "df_agent_v2": {
+      "execution_error": 15,
+      "success": 15,
+      "wrong_operator_choice": 1,
+      "partial_success": 2,
+      "unclassified": 3
+    },
+    "mcp_only": {
+      "execution_error": 18,
+      "success": 11,
+      "wrong_operator_choice": 1,
+      "partial_success": 2,
+      "unclassified": 4
+    }
+  },
+  "by_task_primary": {
+    "1a_qa_basic": {
+      "success": 5,
+      "execution_error": 7
+    },
+    "1b_qa_with_filter": {
+      "wrong_operator_choice": 4,
+      "success": 6,
+      "execution_error": 2
+    },
+    "2a_single_language_sentiment": {
+      "execution_error": 12
+    },
+    "2b_review_governance": {
+      "execution_error": 6,
+      "wrong_operator_choice": 1,
+      "success": 3,
+      "partial_success": 2
+    },
+    "3a_long_doc_summary": {
+      "execution_error": 12
+    },
+    "3b_text_to_qa_chain": {
+      "success": 9,
+      "unclassified": 1,
+      "execution_error": 2
+    },
+    "4a_score_and_filter": {
+      "execution_error": 12
+    },
+    "4b_multidim_scoring": {
+      "execution_error": 10,
+      "partial_success": 2
+    },
+    "5a_field_rename": {
+      "success": 7,
+      "unclassified": 5
+    },
+    "5b_nested_flatten": {
+      "unclassified": 11,
+      "success": 1
+    },
+    "6a_length_filter": {
+      "execution_error": 9,
+      "success": 3
+    },
+    "6b_llm_semantic_filter": {
+      "success": 12
+    }
+  },
+  "details": [
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "partial_success",
+      "all_labels": [
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "partial_success",
+      "all_labels": [
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3a_long_doc_summary",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "3b_text_to_qa_chain",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "partial_success",
+      "all_labels": [
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "partial_success",
+      "all_labels": [
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "dataflow_agent",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_v2",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "mcp_only",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "3b_text_to_qa_chain",
+  "category": "multistage_pipeline",
+  "difficulty": "hard",
+  "user_prompt": "我有一份 JSONL，每行有 'text' 字段，是百科类短文本但包含 HTML 标签、URL、emoji、多余空格等杂质。请帮我构建一个 pipeline：先把文本做规范化清洗（去 HTML、去 URL、去 emoji、合并多余空格），然后对清洗后的文本生成多跳问答对。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "HtmlUrlRemoverRefiner",
+      "slot": "clean_html_url",
+      "required": true,
+      "slot_ops": [
+        "HtmlUrlRemoverRefiner",
+        "HtmlEntityRefiner",
+        "PromptedRefiner"
+      ]
+    },
+    {
+      "op": "RemoveEmojiRefiner",
+      "slot": "clean_emoji",
+      "required": false,
+      "slot_ops": [
+        "RemoveEmojiRefiner",
+        "RemoveEmoticonsRefiner",
+        "PromptedRefiner"
+      ]
+    },
+    {
+      "op": "RemoveExtraSpacesRefiner",
+      "slot": "clean_whitespace",
+      "required": false,
+      "slot_ops": [
+        "RemoveExtraSpacesRefiner",
+        "PromptedRefiner"
+      ]
+    },
+    {
+      "op": "Text2MultiHopQAGenerator",
+      "slot": "multi_hop_qa",
+      "required": true,
+      "slot_ops": [
+        "Text2MultiHopQAGenerator",
+        "Text2QAGenerator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "text",
+    "qa_pairs"
+  ],
+  "acceptance": {
+    "schema": {
+      "text": "str",
+      "qa_pairs|QA_pairs|multi_hop_qa|multi_hop_qa_pairs|multihop_qa|multihop_qa_pairs|qa|questions": "any"
+    },
+    "min_valid_records": 2,
+    "mode": "generate"
+  },
+  "notes": "API-only two-stage chain: deterministic refine → LLM QA gen. Tests preference for deterministic refiners + correct QA operator (core_text not text_sft)."
+}

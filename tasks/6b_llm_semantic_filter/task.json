@@ -1,0 +1,30 @@
+{
+  "task_id": "6b_llm_semantic_filter",
+  "category": "low_quality_filter",
+  "difficulty": "medium",
+  "user_prompt": "我有一份文本 JSONL（text 字段），里面混杂了有意义的句子和无意义的乱码/填充文本。请帮我构建一个 pipeline，用 LLM 判断每条文本是否'有信息量'，过滤掉没信息量的记录。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "PromptedFilter",
+      "slot": "llm_filter",
+      "required": true,
+      "slot_ops": [
+        "PromptedFilter",
+        "PromptedGenerator",
+        "FormatStrPromptedGenerator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "text"
+  ],
+  "acceptance": {
+    "schema": {
+      "text": "str"
+    },
+    "min_valid_records": 2,
+    "mode": "filter"
+  },
+  "notes": "Skill: LLM semantic filter on a single field -> PromptedFilter (not GeneralFilter which is for deterministic rules)."
+}

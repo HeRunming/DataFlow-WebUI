@@ -1,0 +1,23 @@
+{
+  "dataflow_agent": {
+    "n_runs": 7,
+    "avg_create_pipeline": 0.8571428571428571,
+    "avg_render_pipeline": 0.7142857142857143,
+    "context_overflow_rate": 0.2857142857142857,
+    "pipeline_produced_rate": 0.7142857142857143
+  },
+  "direct_cc": {
+    "n_runs": 1,
+    "avg_create_pipeline": 0,
+    "avg_render_pipeline": 0,
+    "context_overflow_rate": 0.0,
+    "pipeline_produced_rate": 0.0
+  },
+  "mcp_only": {
+    "n_runs": 1,
+    "avg_create_pipeline": 1,
+    "avg_render_pipeline": 1,
+    "context_overflow_rate": 0.0,
+    "pipeline_produced_rate": 1.0
+  }
+}

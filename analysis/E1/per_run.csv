@@ -1,0 +1,269 @@
+task_id,method,repetition,time_min,time_to_pipeline_min,exec_success,operator_errors,strict_errors,field_errors,hallucinated,missing_required,wrong_order,unexpected,n_create_pipeline_calls,n_render_pipeline_calls,n_execute_pipeline_calls_by_agent,n_valid_records,n_total_records,final_chain
+1a_qa_basic,dataflow_agent,0,,1.0880337198575338,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,dataflow_agent,1,,0.9400638024012248,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,dataflow_agent,2,,2.385879079500834,0,2,1,0,0,1,0,1,2,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,dataflow_agent,3,,1.0564607659975687,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,dataflow_agent,4,1.934719161192576,1.4682525277137757,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,df_agent_v2,0,3.395191792647044,2.360798180103302,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,df_agent_v2,1,,1.4487544775009156,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,df_agent_v2,2,,2.4204733769098916,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,df_agent_v2,3,,4.037799191474915,0,4,1,0,0,1,0,3,2,1,0,0,1,SFTGeneratorSeed | ReasoningAnswerExtractionQwenMathEvalGenerator | ReasoningPseudoAnswerGenerator
+1a_qa_basic,df_agent_v2,4,2.6283983548482257,1.8615959962209065,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,mcp_only,0,,0.9046302556991577,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,mcp_only,1,1.5938728292783102,1.1469530582427978,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,mcp_only,2,,0.8269348820050557,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,mcp_only,3,,0.9718840638796489,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,mcp_only,4,,1.375414737065633,0,0,0,0,0,0,0,0,1,1,0,0,0,Text2MultiHopQAGenerator
+1b_qa_with_filter,dataflow_agent,0,5.194420039653778,1.2587541699409486,0,6,3,0,0,3,0,3,2,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,dataflow_agent,1,2.2370089292526245,1.1244017680486043,0,6,3,0,0,3,0,3,1,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,dataflow_agent,2,,1.1035314162572225,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,dataflow_agent,3,,1.355477766195933,0,6,3,0,0,3,0,3,1,1,0,0,1,KBCMultiHopQAGeneratorBatch | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,dataflow_agent,4,,1.4416780392328898,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_v2,0,,3.7865078449249268,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_v2,1,,4.719667156537374,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_v2,2,,1.9230487068494162,0,3,3,0,0,3,0,0,1,1,0,0,1,PromptedGenerator | PromptedEvaluator | GeneralFilter
+1b_qa_with_filter,df_agent_v2,3,,1.6296364148457845,0,3,3,0,0,3,0,0,1,1,0,0,1,PromptedGenerator | PromptedEvaluator | GeneralFilter
+1b_qa_with_filter,df_agent_v2,4,,2.183528216679891,0,6,3,0,0,3,0,3,1,1,0,0,1,ReasoningQuestionGenerator | ReasoningAnswerGenerator | RMFilter
+1b_qa_with_filter,direct_cc,0,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+1b_qa_with_filter,direct_cc,1,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+1b_qa_with_filter,direct_cc,2,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+1b_qa_with_filter,direct_cc,3,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+1b_qa_with_filter,direct_cc,4,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+1b_qa_with_filter,mcp_only,0,,1.400527795155843,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,mcp_only,1,2.0665678858757017,1.41750435034434,0,6,3,0,0,3,0,3,1,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,mcp_only,2,2.427436383565267,1.9361488938331604,0,6,3,0,0,3,0,3,1,1,0,0,0,CondorGenerator | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,mcp_only,3,,2.945240028699239,0,6,3,0,0,3,0,3,2,1,0,0,1,KBCMultiHopQAGeneratorBatch | AlpagasusSampleEvaluator | CodeGenericScoreFilter
+1b_qa_with_filter,mcp_only,4,,1.449365536371867,0,6,3,0,0,3,0,3,1,1,0,0,1,KBCMultiHopQAGeneratorBatch | AlpagasusSampleEvaluator | AlpagasusFilter
+2a_single_language_sentiment,dataflow_agent,0,,1.1728115359942117,0,2,1,0,0,1,0,1,2,1,0,0,1,ReasoningQuestionSolvableSampleEvaluator
+2a_single_language_sentiment,dataflow_agent,1,,1.1341252009073892,0,0,1,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator
+2a_single_language_sentiment,dataflow_agent,2,1.8903139034907024,1.277867591381073,1,0,1,0,0,0,0,0,1,1,0,15,15,PromptedEvaluator
+2a_single_language_sentiment,dataflow_agent,3,4.582546758651733,3.2493632674217223,1,3,1,0,0,1,0,2,1,1,0,15,15,AlpagasusSampleEvaluator | AlpagasusSampleEvaluator
+2a_single_language_sentiment,dataflow_agent,4,1.2830310225486756,0.9519206007321676,1,0,1,0,0,0,0,0,1,1,0,15,15,PromptedEvaluator
+2a_single_language_sentiment,df_agent_v2,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,df_agent_v2,1,,4.464474213123322,0,0,1,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator
+2a_single_language_sentiment,df_agent_v2,2,4.19121561050415,2.796730117003123,1,0,0,0,0,0,0,0,1,1,0,15,15,PromptedGenerator
+2a_single_language_sentiment,df_agent_v2,3,,3.850648295879364,0,0,1,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator
+2a_single_language_sentiment,df_agent_v2,4,,1.9023266871770224,0,2,1,0,0,1,0,1,1,1,0,0,1,ReasoningAnswerGenerator
+2a_single_language_sentiment,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,mcp_only,0,,1.2200711766878765,0,2,1,0,0,1,0,1,2,1,0,0,1,AlpagasusSampleEvaluator
+2a_single_language_sentiment,mcp_only,1,,1.2132091005643209,0,2,1,0,0,1,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator
+2a_single_language_sentiment,mcp_only,2,,1.2092888951301575,0,2,1,0,0,1,0,1,1,1,0,0,1,ReasoningAnswerModelJudgeFilter
+2a_single_language_sentiment,mcp_only,3,,1.0928564270337422,0,0,1,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator
+2a_single_language_sentiment,mcp_only,4,1.5858309626579286,1.1892555514971415,1,0,1,0,0,0,0,0,1,1,0,15,15,PromptedEvaluator
+2b_review_governance,dataflow_agent,0,,1.0770520965258281,0,4,3,0,0,2,0,2,1,1,0,0,1,LLMLanguageFilter | RemoveEmojiRefiner | RemoveEmoticonsRefiner | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | FuncCallConversationSampleEvaluator | WordNumberFilter
+2b_review_governance,dataflow_agent,1,,1.7833808660507202,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,dataflow_agent,2,,1.0570842544237773,0,1,2,0,0,0,0,1,1,1,0,0,1,PromptedEvaluator | PromptedRefiner | PromptedEvaluator | PandasOperator | GeneralFilter
+2b_review_governance,dataflow_agent,3,,1.5599226872126262,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,dataflow_agent,4,,1.5340829173723856,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_v2,0,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,df_agent_v2,1,,3.5381468971570333,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_v2,2,,5.41836001475652,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_v2,3,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,df_agent_v2,4,,3.5490233580271404,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,direct_cc,0,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,direct_cc,1,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,direct_cc,2,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,direct_cc,3,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,direct_cc,4,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,mcp_only,0,1.6243036071459451,1.074765638510386,1,1,3,0,0,0,0,1,1,1,0,16,16,PromptedEvaluator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveEmoticonsRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,mcp_only,1,1.371281333764394,0.8836717287699382,1,0,3,0,0,0,0,0,1,1,0,15,15,LLMLanguageFilter | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,mcp_only,2,,1.608029806613922,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,mcp_only,3,,1.6668048779169717,0,0,3,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedGenerator | GeneralFilter
+2b_review_governance,mcp_only,4,3.166275652249654,2.5008212963740033,1,3,3,0,0,1,0,2,1,1,0,20,20,LLMLanguageFilter | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | AlpagasusFilter
+3a_long_doc_summary,dataflow_agent,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,dataflow_agent,1,,3.006465423107147,0,1,1,0,0,0,0,1,1,1,0,0,1,KBCChunkGenerator | PromptedGenerator
+3a_long_doc_summary,dataflow_agent,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,dataflow_agent,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,dataflow_agent,4,,4.568110851446788,0,1,1,0,0,0,0,1,1,1,0,0,1,SentenceNumberFilter | PromptedGenerator
+3a_long_doc_summary,df_agent_v2,0,,2.9100977818171185,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator | PromptedGenerator
+3a_long_doc_summary,df_agent_v2,1,,8.805521925290426,0,1,1,0,0,0,0,1,1,1,0,0,1,PromptedGenerator | WordNumberFilter
+3a_long_doc_summary,df_agent_v2,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,df_agent_v2,3,,2.8044089476267495,0,1,0,0,0,0,0,1,1,1,0,0,1,ChunkedPromptedGenerator | FormatStrPromptedGenerator
+3a_long_doc_summary,df_agent_v2,4,,2.5389983852704368,0,1,1,0,0,0,0,1,1,1,0,0,1,SentenceNumberFilter | PromptedGenerator
+3a_long_doc_summary,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,mcp_only,0,,3.3521788438161213,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator
+3a_long_doc_summary,mcp_only,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,mcp_only,2,,3.055519938468933,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator
+3a_long_doc_summary,mcp_only,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+3a_long_doc_summary,mcp_only,4,,2.6725245237350466,0,0,1,0,0,0,0,0,2,1,0,0,1,PromptedGenerator
+3a_url_to_chunks,dataflow_agent,0,,2.2274306933085124,0,13,3,0,0,3,0,10,1,1,0,0,1,KBCTextCleanerBatch | PromptedGenerator | ChunkedPromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | RemoveEmojiRefiner | WordNumberFilter | PromptedEvaluator | PromptedFilter
+3a_url_to_chunks,dataflow_agent,1,,1.287372354666392,0,9,3,0,0,3,0,6,1,1,0,0,1,PromptedGenerator | ChunkedPromptedGenerator | KBCTextCleanerBatch | WordNumberFilter | HtmlEntityRefiner | RemoveExtraSpacesRefiner
+3a_url_to_chunks,dataflow_agent,2,,2.055263121922811,0,8,3,0,0,3,0,5,1,1,0,0,1,PromptedGenerator | PromptedGenerator | PromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner
+3a_url_to_chunks,dataflow_agent,3,,1.250721549987793,0,7,3,0,0,3,0,4,1,1,0,0,1,PromptedGenerator | PromptedGenerator | KBCTextCleaner | WordNumberFilter | HashDeduplicateFilter
+3a_url_to_chunks,dataflow_agent,4,,1.4328203002611797,0,10,3,0,0,3,0,7,1,1,0,0,1,PromptedGenerator | PromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | WordNumberFilter
+3a_url_to_chunks,direct_cc,0,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+3a_url_to_chunks,direct_cc,1,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+3a_url_to_chunks,direct_cc,2,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+3a_url_to_chunks,direct_cc,3,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+3a_url_to_chunks,direct_cc,4,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+3a_url_to_chunks,mcp_only,0,,1.1751164595286052,0,5,3,0,0,3,0,2,1,1,0,0,1,PromptedGenerator | PromptedGenerator | PromptedRefiner
+3a_url_to_chunks,mcp_only,1,,1.0990816752115886,0,12,3,0,0,3,0,9,1,1,0,0,1,PromptedGenerator | ChunkedPromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | WordNumberFilter | NgramSampleEvaluator | LexicalDiversitySampleEvaluator | PromptedFilter
+3a_url_to_chunks,mcp_only,2,,7.253572380542755,0,9,3,0,0,3,0,6,1,1,0,0,1,PromptedGenerator | ChunkedPromptedGenerator | PromptedRefiner | HtmlUrlRemoverRefiner | HtmlEntityRefiner | PromptedEvaluator | PromptedFilter
+3a_url_to_chunks,mcp_only,3,,1.709078105290731,0,7,3,0,0,3,0,4,1,1,0,0,1,PromptedGenerator | PromptedGenerator | PromptedRefiner | WordNumberFilter | HashDeduplicateFilter
+3a_url_to_chunks,mcp_only,4,,6.446378588676453,0,8,3,0,0,3,0,5,1,1,0,0,1,KBCTextCleaner | HtmlUrlRemoverRefiner | HtmlEntityRefiner | WordNumberFilter | LexicalDiversitySampleEvaluator | NgramSampleEvaluator
+3b_pdf_to_qa,dataflow_agent,0,,2.6473073959350586,0,8,4,0,0,4,0,4,2,1,0,0,1,PromptedGenerator | PandasOperator | PromptedRefiner | Text2MultiHopQAGenerator | Text2QASampleEvaluator | GeneralFilter
+3b_pdf_to_qa,dataflow_agent,1,,2.8793859203656513,0,7,4,0,0,4,0,3,1,1,0,0,1,PromptedGenerator | HtmlUrlRemoverRefiner | ChunkedPromptedGenerator | Text2MultiHopQAGenerator
+3b_pdf_to_qa,dataflow_agent,2,,5.844116842746734,0,7,4,0,0,4,0,3,1,1,0,0,1,PromptedGenerator | Text2MultiHopQAGenerator | KBCTextCleaner | WordNumberFilter | HashDeduplicateFilter
+3b_pdf_to_qa,dataflow_agent,3,,2.2405635794003804,0,8,4,0,0,4,0,4,1,1,0,0,1,PromptedGenerator | PromptedRefiner | Text2MultiHopQAGenerator | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | WordNumberFilter
+3b_pdf_to_qa,dataflow_agent,4,,2.2100929856300353,0,10,4,0,0,4,0,6,1,1,0,0,1,PromptedGenerator | ChunkedPromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | TextNormalizationRefiner | Text2MultiHopQAGenerator
+3b_pdf_to_qa,direct_cc,0,,,0,4,4,0,0,4,0,0,0,0,0,0,0,
+3b_pdf_to_qa,direct_cc,2,,,0,4,4,0,0,4,0,0,0,0,0,0,0,
+3b_pdf_to_qa,direct_cc,3,,,0,4,4,0,0,4,0,0,0,0,0,0,0,
+3b_pdf_to_qa,direct_cc,4,,,0,4,4,0,0,4,0,0,0,0,0,0,0,
+3b_pdf_to_qa,mcp_only,0,,4.187115939458211,0,11,4,0,0,4,0,7,1,1,0,0,1,PromptedGenerator | ChunkedPromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | Text2MultiHopQAGenerator | Text2QASampleEvaluator | PromptedFilter
+3b_pdf_to_qa,mcp_only,1,,9.491052917639415,0,4,4,0,0,4,0,0,1,1,0,0,1,KBCTextCleaner | Text2MultiHopQAGenerator
+3b_pdf_to_qa,mcp_only,2,,5.681263947486878,0,6,4,0,0,4,0,2,1,1,0,0,1,PromptedGenerator | KBCTextCleaner | PromptedGenerator | KBCTextCleaner | Text2MultiHopQAGenerator
+3b_pdf_to_qa,mcp_only,3,,2.3428109367688497,0,8,4,0,0,4,0,4,1,1,0,0,1,PromptedGenerator | ChunkedPromptedGenerator | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | Text2MultiHopQAGenerator
+3b_pdf_to_qa,mcp_only,4,,2.728206427892049,0,8,4,0,0,4,0,4,1,1,0,0,1,PromptedGenerator | HtmlEntityRefiner | HtmlUrlRemoverRefiner | ChunkedPromptedGenerator | Text2QAGenerator
+3b_text_to_qa_chain,dataflow_agent,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+3b_text_to_qa_chain,dataflow_agent,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+3b_text_to_qa_chain,dataflow_agent,2,,1.4847681442896525,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,dataflow_agent,3,,4.584769431749979,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,dataflow_agent,4,4.326613767941793,3.7976741790771484,1,2,1,0,0,1,0,1,1,0,0,8,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,df_agent_v2,0,,2.491535715262095,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlUrlRemoverRefiner | HtmlEntityRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,df_agent_v2,1,2.231643259525299,1.147972786426544,0,2,1,0,0,1,0,1,1,1,0,0,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,df_agent_v2,2,,1.1284868200620015,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,df_agent_v2,3,,0.7166682879130045,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,df_agent_v2,4,,1.8621850728988647,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,direct_cc,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+3b_text_to_qa_chain,direct_cc,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+3b_text_to_qa_chain,direct_cc,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+3b_text_to_qa_chain,direct_cc,4,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+3b_text_to_qa_chain,mcp_only,0,,1.2421551148096721,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,mcp_only,1,,2.469783667723338,0,3,1,0,0,1,0,2,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCTextCleanerBatch | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,mcp_only,2,,1.2234634439150491,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,mcp_only,3,3.648436709245046,2.1250481287638348,0,2,1,0,0,1,0,1,3,0,0,0,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,mcp_only,4,,1.434068250656128,0,3,1,0,0,1,0,2,1,1,0,0,1,KBCTextCleaner | RemoveEmojiRefiner | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+4a_score_and_filter,dataflow_agent,0,1.232968846956889,0.7934368491172791,1,4,2,0,0,2,0,2,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,dataflow_agent,1,,1.422773051261902,0,3,2,0,0,2,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,dataflow_agent,2,,0.9349462270736695,0,4,2,0,0,2,0,2,1,1,0,0,1,FuncCallConversationSampleEvaluator | WordNumberFilter
+4a_score_and_filter,dataflow_agent,3,,0.9541817386945088,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedFilter
+4a_score_and_filter,dataflow_agent,4,,2.150495374202728,0,4,2,0,0,2,0,2,1,1,0,0,1,DeitaQualitySampleEvaluator | DeitaQualityFilter
+4a_score_and_filter,df_agent_v2,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,df_agent_v2,1,4.9531729062398275,1.9534919222195943,1,4,2,0,0,2,0,2,2,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,df_agent_v2,2,,2.2687755783398944,0,3,2,0,0,2,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,df_agent_v2,3,,1.4656090259552002,0,4,2,0,0,2,0,2,1,1,0,0,1,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,df_agent_v2,4,,1.6132201393445333,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | GeneralFilter
+4a_score_and_filter,direct_cc,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,direct_cc,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,direct_cc,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,direct_cc,3,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,direct_cc,4,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,mcp_only,0,1.3040369351704915,0.8064181089401246,1,4,2,0,0,2,0,2,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,mcp_only,1,1.7229211449623107,1.3390691002209982,0,4,2,0,0,2,0,2,1,1,0,0,0,FuncCallConversationSampleEvaluator | CodeGenericScoreFilter
+4a_score_and_filter,mcp_only,2,1.6754730184872946,1.0788823127746583,1,4,2,0,0,2,0,2,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,mcp_only,3,,0.9279512405395508,0,3,2,0,0,2,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,mcp_only,4,,1.8604506413141886,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,dataflow_agent,0,,1.5312469482421875,0,3,2,0,0,2,0,1,1,1,0,0,1,MetaSampleEvaluator | GeneralFilter
+4b_multidim_scoring,dataflow_agent,1,,1.4455308000246683,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,dataflow_agent,2,,1.660385298728943,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | PromptedGenerator | GeneralFilter
+4b_multidim_scoring,dataflow_agent,3,,0.8868183930714925,0,1,3,0,1,0,0,0,1,1,0,0,1,PromptedGenerator | JsonExtractRefiner | GeneralFilter
+4b_multidim_scoring,dataflow_agent,4,,1.5201488534609477,0,1,2,0,0,0,0,1,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | PandasOperator | GeneralFilter
+4b_multidim_scoring,df_agent_v2,0,2.148573839664459,1.628173049290975,1,6,2,0,0,2,0,4,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | CodeGenericScoreFilter
+4b_multidim_scoring,df_agent_v2,1,6.067527341842651,3.7623210310935975,1,5,2,0,0,2,0,3,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | GeneralFilter
+4b_multidim_scoring,df_agent_v2,2,,4.073923679192861,0,1,2,0,0,0,0,1,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | PandasOperator | GeneralFilter
+4b_multidim_scoring,df_agent_v2,3,4.190113310019175,3.0816578388214113,1,0,2,0,0,0,0,0,1,1,0,7,7,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,df_agent_v2,4,,1.76835351785024,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,direct_cc,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,direct_cc,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,direct_cc,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,direct_cc,3,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,direct_cc,4,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,mcp_only,0,,1.7233848214149474,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,mcp_only,1,,1.1411987582842509,0,5,2,0,0,2,0,3,1,1,0,0,1,AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | GeneralFilter
+4b_multidim_scoring,mcp_only,2,,2.2622745990753175,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,mcp_only,3,,1.5972567995389302,0,5,2,0,0,2,0,3,1,1,0,0,1,AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | AlpagasusSampleEvaluator | GeneralFilter
+4b_multidim_scoring,mcp_only,4,1.8616270065307616,1.4219025532404581,1,0,2,0,0,0,0,0,1,1,0,9,9,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+5a_field_rename,dataflow_agent,0,,2.074240179856618,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,dataflow_agent,1,,4.2960288524627686,0,2,2,0,1,1,0,0,1,1,0,1,1,FieldMapOperator
+5a_field_rename,dataflow_agent,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,dataflow_agent,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,dataflow_agent,4,1.68246644337972,1.2898547093073527,1,0,0,0,0,0,0,0,1,1,0,8,8,PandasOperator
+5a_field_rename,df_agent_v2,0,,0.981553582350413,0,0,0,0,0,0,0,0,1,2,0,1,1,PandasOperator
+5a_field_rename,df_agent_v2,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,df_agent_v2,2,3.941231874624888,3.039369451999664,1,0,0,0,0,0,0,0,1,1,0,8,8,PandasOperator
+5a_field_rename,df_agent_v2,3,,1.0415519754091898,0,0,0,0,0,0,0,0,2,1,0,1,1,PandasOperator
+5a_field_rename,df_agent_v2,4,,1.1820698738098145,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,mcp_only,0,1.002323317527771,0.7144033034642537,1,0,0,0,0,0,0,0,1,1,0,8,8,PandasOperator
+5a_field_rename,mcp_only,1,,0.7986196835835775,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,mcp_only,2,,1.3900684356689452,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,mcp_only,3,,0.8211135705312093,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,mcp_only,4,,0.8393651922543843,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,dataflow_agent,0,,2.6128291805585224,0,2,1,0,0,1,0,1,1,2,0,1,1,PromptedGenerator
+5b_nested_flatten,dataflow_agent,1,,1.4867908557256062,0,3,1,0,0,1,0,2,1,1,0,1,1,PromptedRefiner | TextNormalizationRefiner
+5b_nested_flatten,dataflow_agent,2,,1.3193155527114868,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,dataflow_agent,3,,2.654709581534068,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,dataflow_agent,4,,0.9518427928288777,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,df_agent_v2,0,,2.0781966050465903,0,2,1,0,0,1,0,1,1,1,0,1,1,PromptedGenerator
+5b_nested_flatten,df_agent_v2,1,,0.8339509606361389,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,df_agent_v2,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,df_agent_v2,3,,1.8920743425687154,0,3,1,0,0,1,0,2,1,1,0,1,1,KBCTextCleaner | ContentNullFilter
+5b_nested_flatten,df_agent_v2,4,,1.535616660118103,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,mcp_only,0,,6.62926953236262,0,2,1,0,0,1,0,1,1,1,0,1,1,SFTGeneratorSeed
+5b_nested_flatten,mcp_only,1,,0.7450712203979493,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,mcp_only,2,,0.7885401010513305,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator | PandasOperator
+5b_nested_flatten,mcp_only,3,,1.7798075358072916,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,mcp_only,4,,1.6071028192838033,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+6a_length_filter,dataflow_agent,0,,0.5679594318072001,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,dataflow_agent,1,,0.5339401682217916,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,dataflow_agent,2,0.9242364128430685,0.6491573452949524,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,dataflow_agent,3,0.8371467987696329,0.5863950530687968,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,dataflow_agent,4,,0.5115005612373352,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,df_agent_v2,0,,0.47941381533940636,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,df_agent_v2,1,0.8417026559511821,0.5800196925799052,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,df_agent_v2,2,,0.4496871789296468,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,df_agent_v2,3,,0.5457537571589152,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,df_agent_v2,4,0.7322243293126424,0.47489324808120725,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,mcp_only,0,,0.43988741636276246,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,mcp_only,1,,0.44252695242563883,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,mcp_only,2,,0.43371137777964275,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,mcp_only,3,0.7688631335894267,0.46367914279301964,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,mcp_only,4,,0.45720372200012205,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6b_llm_semantic_filter,dataflow_agent,0,1.761030868689219,1.3926608284314475,1,4,1,0,0,1,0,3,1,1,0,5,5,HtmlUrlRemoverRefiner | WordNumberFilter | AlpagasusFilter
+6b_llm_semantic_filter,dataflow_agent,1,,1.1823304613431296,0,5,1,0,0,1,0,4,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | AlpagasusFilter
+6b_llm_semantic_filter,dataflow_agent,2,,0.771166737874349,0,2,1,0,0,1,0,1,1,1,0,0,1,AlpagasusFilter
+6b_llm_semantic_filter,dataflow_agent,3,,2.359468770027161,0,3,1,0,0,1,0,2,1,1,0,0,1,WordNumberFilter | AlpagasusFilter
+6b_llm_semantic_filter,dataflow_agent,4,,0.7876573085784913,0,5,1,0,0,1,0,4,1,1,0,0,1,HtmlUrlRemoverRefiner | LexicalDiversitySampleEvaluator | NgramSampleEvaluator | AlpagasusFilter
+6b_llm_semantic_filter,df_agent_v2,0,,1.2455747723579407,0,4,1,0,0,1,0,3,1,1,0,0,1,RMFilter | ContentNullFilter | WordNumberFilter
+6b_llm_semantic_filter,df_agent_v2,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,df_agent_v2,2,,1.0268317182858786,0,18,1,0,0,1,0,17,1,1,0,0,1,ContentNullFilter | WordNumberFilter | CharNumberFilter | UniqueWordsFilter | MeanWordLengthFilter | SpecialCharacterFilter | HtmlEntityFilter | LoremIpsumFilter | LineEndWithEllipsisFilter | SymbolWordRatioFilter | CurlyBracketFilter | CapitalWordsFilter | NgramFilter | LexicalDiversityFilter | RMFilter | DeitaQualityFilter | AlpagasusFilter
+6b_llm_semantic_filter,df_agent_v2,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,df_agent_v2,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,direct_cc,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,direct_cc,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,direct_cc,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,direct_cc,3,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,direct_cc,4,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,mcp_only,0,,0.8328775922457378,0,5,1,0,0,1,0,4,1,1,0,0,1,HtmlUrlRemoverRefiner | HtmlEntityRefiner | AlpagasusSampleEvaluator | AlpagasusFilter
+6b_llm_semantic_filter,mcp_only,1,,3.497144913673401,0,6,1,0,0,1,0,5,2,1,0,0,1,WordNumberFilter | LexicalDiversitySampleEvaluator | LexicalDiversityFilter | MetaSampleEvaluator | GeneralFilter
+6b_llm_semantic_filter,mcp_only,2,2.3176694909731546,1.7514790097872417,0,3,1,0,0,1,0,2,1,1,0,0,0,AlpagasusSampleEvaluator | AlpagasusFilter
+6b_llm_semantic_filter,mcp_only,3,1.2813352624575296,0.846233582496643,1,2,1,0,0,1,0,1,1,1,0,8,8,AlpagasusFilter
+6b_llm_semantic_filter,mcp_only,4,1.764383852481842,1.2163597822189331,1,5,1,0,0,1,0,4,1,1,0,8,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | AlpagasusFilter

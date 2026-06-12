@@ -1,0 +1,10 @@
+task_id,method,repetition,time_min,time_to_pipeline_min,exec_success,operator_errors,strict_errors,field_errors,hallucinated,missing_required,wrong_order,unexpected,n_create_pipeline_calls,n_render_pipeline_calls,n_execute_pipeline_calls_by_agent,n_valid_records,n_total_records,final_chain
+2b_review_governance,dataflow_agent,0,,,0,3,,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,dataflow_agent,1,,,0,3,,0,0,2,0,1,2,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,dataflow_agent,2,,2.1282013098398846,0,5,3,0,0,3,0,2,1,1,0,0,1,LLMLanguageFilter | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,dataflow_agent,3,,1.775928298632304,0,0,0,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | FormatStrPromptedGenerator | GeneralFilter
+2b_review_governance,dataflow_agent,4,,1.4902143200238547,0,4,3,0,0,2,0,2,1,1,0,0,1,LLMLanguageFilter | TextNormalizationRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | AlpagasusSampleEvaluator | AlpagasusFilter
+2b_review_governance,dataflow_agent,5,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,dataflow_agent,6,3.095824142297109,2.466325104236603,0,1,3,0,0,0,0,1,1,1,0,0,18,PandasOperator | LLMLanguageFilter | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,direct_cc,0,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+2b_review_governance,mcp_only,0,,1.335893416404724,0,1,2,0,0,0,0,1,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PandasOperator | GeneralFilter

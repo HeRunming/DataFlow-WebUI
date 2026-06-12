@@ -1,0 +1,79 @@
+{
+  "task_id": "2b_review_governance",
+  "category": "review_governance",
+  "difficulty": "medium",
+  "user_prompt": "我有一份多语言（中英混合）的电商评论 JSONL，每行包含 product_name、category、review_text。请帮我构建一个评论治理 pipeline：(1) 检测每条评论的语言；(2) 对评论做规范化清洗；(3) 基于规范化后的文本给出 1-5 的整体质量分数并附一段简短解释；(4) 基于质量分数过滤掉低质量（分数 < 3）的评论。输入文件路径由已注册的数据集提供。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "LLMLanguageFilter",
+      "slot": "language_detect",
+      "required": false,
+      "slot_ops": [
+        "LLMLanguageFilter",
+        "LanguageFilter",
+        "PromptedGenerator",
+        "FormatStrPromptedGenerator"
+      ]
+    },
+    {
+      "op": "PromptedRefiner",
+      "slot": "refine",
+      "required": true,
+      "slot_ops": [
+        "PromptedRefiner",
+        "PromptedGenerator",
+        "FormatStrPromptedGenerator",
+        "RemoveEmojiRefiner",
+        "RemoveExtraSpacesRefiner",
+        "RemoveEmoticonsRefiner",
+        "HtmlUrlRemoverRefiner",
+        "LowercaseRefiner",
+        "TextNormalizationRefiner",
+        "StemmingLemmatizationRefiner",
+        "RemoveContractionsRefiner",
+        "RemovePunctuationRefiner",
+        "RemoveRepetitionsPunctuationRefiner",
+        "RemoveNumberRefiner"
+      ]
+    },
+    {
+      "op": "FormatStrPromptedGenerator",
+      "slot": "score",
+      "required": true,
+      "slot_ops": [
+        "FormatStrPromptedGenerator",
+        "PromptedGenerator",
+        "PromptedEvaluator"
+      ]
+    },
+    {
+      "op": "GeneralFilter",
+      "slot": "filter",
+      "required": true,
+      "slot_ops": [
+        "GeneralFilter",
+        "PromptedFilter"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "product_name",
+    "category",
+    "review_text",
+    "language",
+    "normalized_text",
+    "quality_score",
+    "score_explanation"
+  ],
+  "acceptance": {
+    "schema": {
+      "product_name": "str",
+      "review_text": "str",
+      "quality_score|score|quality|label": "any"
+    },
+    "min_valid_records": 3,
+    "mode": "filter"
+  },
+  "notes": "主 case study。pipeline 需要完成 detect -> refine -> score -> filter 四步。semantic slot 放宽匹配：score 槽位允许 FormatStrPromptedGenerator / PromptedGenerator / PromptedEvaluator。严格 skill 合规检查仍然基于 op 字段。"
+}

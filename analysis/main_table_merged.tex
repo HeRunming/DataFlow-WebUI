@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lcccccc}
+\toprule
+Method & Time & Succ. & Op.\ err & Fld.\ err & Edits & Rat. \\
+\midrule
+Manual & -- & -- & -- & -- & -- & -- \\
+Direct CC & --* & 0.0 & 1.8 & 0.0 & -- & -- \\
+MCP-only & 2.3 & 36.1 & 0.6 & 0.0 & -- & -- \\
+\textsc{DF-Agent} (dev-only) & 2.0 & 26.7 & 1.8 & 0.0 & -- & -- \\
+\textsc{DF-Agent} (slim) & 2.3 & 48.6 & 0.5 & 0.0 & -- & -- \\
+\textsc{DF-Agent} (v2) & 2.2 & 36.1 & 0.6 & 0.0 & -- & -- \\
+\textsc{DF-Agent} & 2.1 & 32.4 & 0.6 & 0.0 & -- & -- \\
+\bottomrule
+\end{tabular}
+\caption{Main evaluation. Time is median minutes to first successful Run (or time-to-pipeline * when execution was not reached); Succ. is the share of runs with valid output records; Op./Fld. err are mean operator and field-flow errors per task. Rating and manual Edits deferred.}
+\label{tab:eval}
+\end{table}

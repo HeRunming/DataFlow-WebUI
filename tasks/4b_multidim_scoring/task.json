@@ -1,0 +1,51 @@
+{
+  "task_id": "4b_multidim_scoring",
+  "category": "multifield_scoring",
+  "difficulty": "hard",
+  "user_prompt": "我有一份 QA 数据集（question + answer）。请帮我构建一个 pipeline：对每条 QA 在 correctness（正确性）、completeness（完整性）、fluency（流畅度）三个维度分别打 1-5 分，然后只保留三个维度平均分大于等于 3.5 的记录。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "FormatStrPromptedGenerator",
+      "slot": "multidim_score",
+      "required": true,
+      "slot_ops": [
+        "FormatStrPromptedGenerator",
+        "PromptedGenerator",
+        "PromptedEvaluator",
+        "Text2QASampleEvaluator",
+        "AlpagasusSampleEvaluator",
+        "AlpagasusFilter",
+        "PromptedFilter"
+      ]
+    },
+    {
+      "op": "GeneralFilter",
+      "slot": "filter",
+      "required": false,
+      "slot_ops": [
+        "GeneralFilter",
+        "PromptedFilter"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "question",
+    "answer",
+    "correctness",
+    "completeness",
+    "fluency"
+  ],
+  "acceptance": {
+    "schema": {
+      "question": "str",
+      "answer": "str",
+      "correctness|correctness_score|correctness_grade": "float",
+      "completeness|completeness_score|completeness_grade": "float",
+      "fluency|fluency_score|fluency_grade": "float"
+    },
+    "min_valid_records": 2,
+    "mode": "filter"
+  },
+  "notes": "Tests multi-dimensional single-prompt scoring via JSON schema output. GeneralFilter on computed mean."
+}

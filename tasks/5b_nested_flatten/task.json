@@ -1,0 +1,37 @@
+{
+  "task_id": "5b_nested_flatten",
+  "category": "schema_normalization",
+  "difficulty": "medium",
+  "user_prompt": "我有一份嵌套的文档 JSONL，每行有 doc_id、metadata（title/tags/author）、content。请帮我构建一个 pipeline 把嵌套字段展平：metadata.title -> title，metadata.author.name -> author_name，metadata.author.email -> author_email，metadata.tags 保留为 tags 字段。不需要 LLM。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "PandasOperator",
+      "slot": "deterministic_transform",
+      "required": true,
+      "slot_ops": [
+        "PandasOperator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "doc_id",
+    "title",
+    "author_name",
+    "author_email",
+    "tags",
+    "content"
+  ],
+  "acceptance": {
+    "schema": {
+      "doc_id": "any",
+      "title": "str",
+      "author_name": "str",
+      "author_email": "str",
+      "tags": "any"
+    },
+    "min_valid_records": 3,
+    "mode": "generate"
+  },
+  "notes": "Same 'no LLM needed' lesson as 5a, but with nested flatten."
+}

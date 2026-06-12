@@ -1,0 +1,4 @@
+method,n_runs,time_median_min,time_to_pipeline_median_min,exec_success_rate,operator_errors_mean,strict_errors_mean,field_errors_mean,n_create_pipeline_mean,n_render_pipeline_mean,n_execute_by_agent_mean,n_pipelines_produced_rate
+dataflow_agent,7,3.095824142297109,1.9520648042360942,0.0,2.7142857142857144,2.4,0,0.8571428571428571,0.7142857142857143,0,0.7142857142857143
+direct_cc,1,,,0.0,3,3,0,0,0,0,0.0
+mcp_only,1,,1.335893416404724,0.0,1,2,0,1,1,0,1.0

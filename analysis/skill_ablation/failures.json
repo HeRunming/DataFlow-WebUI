@@ -1,0 +1,617 @@
+{
+  "by_method_primary": {
+    "df_agent_only_dev": {
+      "wrong_operator_choice": 13,
+      "execution_error": 5,
+      "success": 5,
+      "context_overflow": 2,
+      "unclassified": 5
+    },
+    "df_agent_slim": {
+      "wrong_operator_choice": 11,
+      "execution_error": 9,
+      "success": 3,
+      "ui_disconnect": 1,
+      "operator_hallucination": 1,
+      "unclassified": 4,
+      "context_overflow": 1
+    }
+  },
+  "by_task_primary": {
+    "1a_qa_basic": {
+      "wrong_operator_choice": 6
+    },
+    "1b_qa_with_filter": {
+      "wrong_operator_choice": 6
+    },
+    "2a_single_language_sentiment": {
+      "wrong_operator_choice": 2,
+      "execution_error": 3,
+      "success": 1
+    },
+    "2b_review_governance": {
+      "success": 1,
+      "execution_error": 5
+    },
+    "4a_score_and_filter": {
+      "wrong_operator_choice": 4,
+      "context_overflow": 1,
+      "ui_disconnect": 1
+    },
+    "4b_multidim_scoring": {
+      "context_overflow": 1,
+      "wrong_operator_choice": 2,
+      "execution_error": 2,
+      "operator_hallucination": 1
+    },
+    "5a_field_rename": {
+      "unclassified": 5,
+      "success": 1
+    },
+    "5b_nested_flatten": {
+      "unclassified": 4,
+      "success": 2
+    },
+    "6a_length_filter": {
+      "success": 3,
+      "execution_error": 3
+    },
+    "6b_llm_semantic_filter": {
+      "wrong_operator_choice": 4,
+      "execution_error": 1,
+      "context_overflow": 1
+    }
+  },
+  "details": [
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1a_qa_basic",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "1b_qa_with_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2a_single_language_sentiment",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "2b_review_governance",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "ui_disconnect",
+      "all_labels": [
+        "ui_disconnect",
+        "wrong_operator_choice"
+      ]
+    },
+    {
+      "task_id": "4a_score_and_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "4b_multidim_scoring",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "operator_hallucination",
+      "all_labels": [
+        "operator_hallucination",
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5a_field_rename",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "5b_nested_flatten",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "unclassified",
+      "all_labels": []
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "success",
+      "all_labels": [
+        "success"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6a_length_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_only_dev",
+      "rep": 0,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_only_dev",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_only_dev",
+      "rep": 2,
+      "primary": "execution_error",
+      "all_labels": [
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_slim",
+      "rep": 0,
+      "primary": "context_overflow",
+      "all_labels": [
+        "context_overflow",
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_slim",
+      "rep": 1,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "partial_success"
+      ]
+    },
+    {
+      "task_id": "6b_llm_semantic_filter",
+      "method": "df_agent_slim",
+      "rep": 2,
+      "primary": "wrong_operator_choice",
+      "all_labels": [
+        "wrong_operator_choice",
+        "execution_error"
+      ]
+    }
+  ]
+}

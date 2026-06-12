@@ -1,0 +1,31 @@
+{
+  "task_id": "3a_long_doc_summary",
+  "category": "long_document_processing",
+  "difficulty": "medium",
+  "user_prompt": "我有一份长文档 JSONL，每行有 'doc' 字段包含一段约 1000-2000 字的长英文段落。请帮我构建一个 pipeline：对每个 doc 生成一段简洁摘要（summary 字段，3-4 句话）。注意文档可能超出 LLM 上下文，需要选择合适的算子分段处理。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "ChunkedPromptedGenerator",
+      "slot": "chunked_summary",
+      "required": true,
+      "slot_ops": [
+        "ChunkedPromptedGenerator",
+        "PromptedGenerator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "doc",
+    "summary"
+  ],
+  "acceptance": {
+    "schema": {
+      "doc": "str",
+      "summary|summaries|summarized_text|doc_summary": "str"
+    },
+    "min_valid_records": 3,
+    "mode": "generate"
+  },
+  "notes": "API-only task. Tests whether agent picks ChunkedPromptedGenerator for long docs vs. naively using PromptedGenerator (which may fail on overflow)."
+}

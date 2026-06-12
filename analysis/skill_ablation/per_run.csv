@@ -1,0 +1,61 @@
+task_id,method,repetition,time_min,time_to_pipeline_min,exec_success,operator_errors,strict_errors,field_errors,hallucinated,missing_required,wrong_order,unexpected,n_create_pipeline_calls,n_render_pipeline_calls,n_execute_pipeline_calls_by_agent,n_valid_records,n_total_records,final_chain
+1a_qa_basic,df_agent_only_dev,0,,2.1505336284637453,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,df_agent_only_dev,1,1.9729728857676188,1.2310826102892558,0,2,1,0,0,1,0,1,2,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,df_agent_only_dev,2,,2.4975538651148477,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,df_agent_slim,0,,1.9862654288609822,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,df_agent_slim,1,2.040232765674591,1.4727347413698832,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,df_agent_slim,2,1.4468239267667136,1.0723989288012186,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1b_qa_with_filter,df_agent_only_dev,0,3.5861270785331727,2.1949496428171793,0,6,3,0,0,3,0,3,1,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_only_dev,1,,1.8911123394966125,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_only_dev,2,,2.246430544058482,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_slim,0,,1.037138613065084,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_slim,1,,1.6770352005958558,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,df_agent_slim,2,2.3178864479064942,1.6053112149238586,0,6,3,0,0,3,0,3,1,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+2a_single_language_sentiment,df_agent_only_dev,0,,0.8971861839294434,0,2,1,0,0,1,0,1,1,1,0,0,1,ReasoningQuestionSolvableSampleEvaluator
+2a_single_language_sentiment,df_agent_only_dev,1,,3.7966262777646382,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,df_agent_only_dev,2,,2.0243322412172953,0,1,1,0,0,0,0,1,2,1,0,0,1,FormatStrPromptedGenerator | PromptedEvaluator | GeneralFilter
+2a_single_language_sentiment,df_agent_slim,0,,1.897775443394979,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,df_agent_slim,1,1.9493143200874328,1.227850349744161,1,0,1,0,0,0,0,0,1,1,0,15,15,PromptedEvaluator
+2a_single_language_sentiment,df_agent_slim,2,4.599215523401896,2.653999336560567,1,6,1,0,0,0,0,6,1,1,0,13,13,LLMLanguageFilter | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_only_dev,0,2.895438921451569,1.8149436155954997,1,0,2,0,0,0,0,0,1,1,0,19,19,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_only_dev,1,,4.642132051785787,0,0,3,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_only_dev,2,,1.872207506497701,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedGenerator | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,df_agent_slim,0,,5.3927614768346155,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedGenerator | PromptedRefiner | PromptedEvaluator | PromptedGenerator | GeneralFilter
+2b_review_governance,df_agent_slim,1,,1.8472731868426004,0,0,3,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,df_agent_slim,2,,5.875028145313263,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+4a_score_and_filter,df_agent_only_dev,0,,0.8716810584068299,0,4,2,0,0,2,0,2,1,1,0,0,1,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,df_agent_only_dev,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,df_agent_only_dev,2,,1.046303351720174,0,4,2,0,0,2,0,2,1,1,0,0,1,FuncCallConversationSampleEvaluator | WordNumberFilter
+4a_score_and_filter,df_agent_slim,0,1.399497111638387,0.8602961381276448,1,4,2,0,0,2,0,2,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,df_agent_slim,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,df_agent_slim,2,,1.1316077391306558,0,3,2,0,0,2,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4b_multidim_scoring,df_agent_only_dev,0,1.9782650510470072,1.1098347147305807,1,4,2,0,0,2,0,2,1,0,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4b_multidim_scoring,df_agent_only_dev,1,,4.210416793823242,0,3,2,0,0,2,0,1,1,1,0,0,1,MetaSampleEvaluator | GeneralFilter
+4b_multidim_scoring,df_agent_only_dev,2,,1.6417392253875733,0,4,2,0,0,2,0,2,1,1,0,0,1,FuncCallConversationSampleEvaluator | CodeGenericScoreFilter
+4b_multidim_scoring,df_agent_slim,0,,2.598900318145752,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,df_agent_slim,1,,1.3799734632174174,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedEvaluator | PromptedEvaluator | GeneralFilter
+4b_multidim_scoring,df_agent_slim,2,,1.274762709935506,0,2,3,0,1,1,0,0,1,1,0,0,1,PromptedGenerator | GenericFilter
+5a_field_rename,df_agent_only_dev,0,,0.7694251060485839,0,0,0,0,0,0,0,0,2,1,0,1,1,PandasOperator
+5a_field_rename,df_agent_only_dev,1,,1.189203933874766,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,df_agent_only_dev,2,,0.7901595592498779,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,df_agent_slim,0,,0.6762881358464559,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,df_agent_slim,1,,0.7828800996144613,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5a_field_rename,df_agent_slim,2,0.9759910980860392,0.7177849253018697,1,0,0,0,0,0,0,0,1,1,0,8,8,PandasOperator
+5b_nested_flatten,df_agent_only_dev,0,,6.941691788037618,0,0,0,0,0,0,0,0,2,1,0,1,1,PandasOperator | PandasOperator
+5b_nested_flatten,df_agent_only_dev,1,1.3528358499209086,0.989488951365153,1,0,0,0,0,0,0,0,1,1,0,5,5,PandasOperator
+5b_nested_flatten,df_agent_only_dev,2,,1.5189099868138631,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,df_agent_slim,0,1.2898529489835104,0.9983797669410706,1,0,0,0,0,0,0,0,1,1,0,5,5,PandasOperator
+5b_nested_flatten,df_agent_slim,1,,1.0821886936823526,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+5b_nested_flatten,df_agent_slim,2,,1.0115438540776571,0,0,0,0,0,0,0,0,1,1,0,1,1,PandasOperator
+6a_length_filter,df_agent_only_dev,0,0.9577081163724264,0.6976151784261068,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,df_agent_only_dev,1,0.8899410168329874,0.4461790124575297,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,df_agent_only_dev,2,0.9012849450111389,0.537153689066569,1,0,0,0,0,0,0,0,1,1,0,5,5,WordNumberFilter
+6a_length_filter,df_agent_slim,0,,0.7409265001614889,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,df_agent_slim,1,,0.5278805732727051,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6a_length_filter,df_agent_slim,2,,0.6132235010464986,0,0,0,0,0,0,0,0,1,1,0,0,1,WordNumberFilter
+6b_llm_semantic_filter,df_agent_only_dev,0,4.847741365432739,3.3382565498352053,1,2,1,0,0,1,0,1,1,1,0,8,8,AlpagasusFilter
+6b_llm_semantic_filter,df_agent_only_dev,1,5.33435363372167,2.804156462351481,1,3,1,0,0,1,0,2,1,1,0,8,8,FuncCallConversationSampleEvaluator | WordNumberFilter
+6b_llm_semantic_filter,df_agent_only_dev,2,,3.17631227572759,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedFilter
+6b_llm_semantic_filter,df_agent_slim,0,,5.0918447812398275,0,4,1,0,0,1,0,3,1,1,0,0,1,WordNumberFilter | AlpagasusFilter | RMFilter
+6b_llm_semantic_filter,df_agent_slim,1,1.5456442435582478,0.9374052961667378,1,3,1,0,0,1,0,2,1,1,0,6,6,AlpagasusFilter | WordNumberFilter
+6b_llm_semantic_filter,df_agent_slim,2,,1.736479683717092,0,3,1,0,0,1,0,2,1,1,0,0,1,MetaSampleEvaluator | GeneralFilter

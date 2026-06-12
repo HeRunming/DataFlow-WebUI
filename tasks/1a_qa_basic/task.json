@@ -1,0 +1,31 @@
+{
+  "task_id": "1a_qa_basic",
+  "category": "qa_generation",
+  "difficulty": "easy",
+  "user_prompt": "我有一份 JSONL 数据，每行有一个 'chunk' 字段，包含一段百科或事实性文本。请帮我构建一个 pipeline，为每个 chunk 生成多跳（multi-hop）问答对。不需要后续过滤，只生成 QA 即可。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "Text2MultiHopQAGenerator",
+      "slot": "multi_hop_qa",
+      "required": true,
+      "slot_ops": [
+        "Text2MultiHopQAGenerator",
+        "Text2QAGenerator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "chunk",
+    "qa_pairs"
+  ],
+  "acceptance": {
+    "schema": {
+      "chunk": "str",
+      "qa_pairs|QA_pairs|multi_hop_qa|multi_hop_qa_pairs|multihop_qa|multihop_qa_pairs|qa|questions": "any"
+    },
+    "min_valid_records": 3,
+    "mode": "generate"
+  },
+  "notes": "Skill lesson: must choose Text2MultiHopQAGenerator, not PromptedGenerator. qa_pairs is nested list of dicts. Strict match expected."
+}

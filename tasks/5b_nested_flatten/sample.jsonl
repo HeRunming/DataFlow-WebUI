@@ -1,0 +1,5 @@
+{"doc_id": "d1", "metadata": {"title": "Alpha", "tags": ["a", "b"], "author": {"name": "Alice", "email": "a@x.com"}}, "content": "hello world"}
+{"doc_id": "d2", "metadata": {"title": "Beta", "tags": ["c"], "author": {"name": "Bob", "email": "b@x.com"}}, "content": "goodbye"}
+{"doc_id": "d3", "metadata": {"title": "Gamma", "tags": ["d", "e", "f"], "author": {"name": "Carol", "email": "c@x.com"}}, "content": "testing"}
+{"doc_id": "d4", "metadata": {"title": "Delta", "tags": [], "author": {"name": "Dan", "email": "d@x.com"}}, "content": "empty tags"}
+{"doc_id": "d5", "metadata": {"title": "Epsilon", "tags": ["g"], "author": {"name": "Eve", "email": "e@x.com"}}, "content": "final"}

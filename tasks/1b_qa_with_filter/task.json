@@ -1,0 +1,52 @@
+{
+  "task_id": "1b_qa_with_filter",
+  "category": "qa_generation",
+  "difficulty": "medium",
+  "user_prompt": "我有一份 JSONL 数据，每行有一个 'chunk' 字段，包含一段百科或事实性文本。请帮我构建一个 pipeline：先为每个 chunk 生成多跳问答对，然后对 QA 质量进行打分，最后过滤掉低质量（分数 < 3）的记录。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "Text2MultiHopQAGenerator",
+      "slot": "multi_hop_qa",
+      "required": true,
+      "slot_ops": [
+        "Text2MultiHopQAGenerator",
+        "Text2QAGenerator"
+      ]
+    },
+    {
+      "op": "Text2QASampleEvaluator",
+      "slot": "qa_quality_score",
+      "required": true,
+      "slot_ops": [
+        "Text2QASampleEvaluator",
+        "PromptedEvaluator",
+        "FormatStrPromptedGenerator",
+        "PromptedGenerator"
+      ]
+    },
+    {
+      "op": "GeneralFilter",
+      "slot": "filter",
+      "required": true,
+      "slot_ops": [
+        "GeneralFilter",
+        "PromptedFilter"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "chunk",
+    "qa_pairs",
+    "quality_score"
+  ],
+  "acceptance": {
+    "schema": {
+      "chunk": "str",
+      "qa_pairs|QA_pairs|multi_hop_qa|multi_hop_qa_pairs|multihop_qa|multihop_qa_pairs|qa|questions": "any"
+    },
+    "min_valid_records": 1,
+    "mode": "filter"
+  },
+  "notes": "测试 agent 是否意识到 QA_pairs 是 nested list，不能直接 score/filter qa_pairs 的 question/answer 字段，必须先评估整组 qa_pairs 或 explode。"
+}

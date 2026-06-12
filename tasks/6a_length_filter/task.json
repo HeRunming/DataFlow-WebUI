@@ -1,0 +1,30 @@
+{
+  "task_id": "6a_length_filter",
+  "category": "low_quality_filter",
+  "difficulty": "easy",
+  "user_prompt": "我有一份文本 JSONL（text 字段）。请帮我构建一个 pipeline，过滤掉单词数少于 10 的短文本。不需要 LLM。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "WordNumberFilter",
+      "slot": "length_filter",
+      "required": true,
+      "slot_ops": [
+        "WordNumberFilter",
+        "GeneralFilter",
+        "PandasOperator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "text"
+  ],
+  "acceptance": {
+    "schema": {
+      "text": "str"
+    },
+    "min_valid_records": 3,
+    "mode": "filter"
+  },
+  "notes": "Skill: use specialized WordNumberFilter for length, not PromptedFilter. Deterministic filter."
+}

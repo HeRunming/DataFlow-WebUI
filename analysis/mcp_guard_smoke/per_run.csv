@@ -1,0 +1,19 @@
+task_id,method,repetition,time_min,time_to_pipeline_min,exec_success,operator_errors,strict_errors,field_errors,hallucinated,missing_required,wrong_order,unexpected,n_create_pipeline_calls,n_render_pipeline_calls,n_execute_pipeline_calls_by_agent,n_valid_records,n_total_records,final_chain
+1a_qa_basic,dataflow_agent,0,,0.6917722225189209,0,0,0,0,0,0,0,0,1,1,0,0,1,Text2MultiHopQAGenerator
+1a_qa_basic,dataflow_agent,1,,0.627104918162028,0,0,0,0,0,0,0,0,1,1,0,0,1,Text2MultiHopQAGenerator
+1a_qa_basic,df_agent_v2,0,,0.5435261050860087,0,0,0,0,0,0,0,0,1,1,0,0,1,Text2MultiHopQAGenerator
+1a_qa_basic,df_agent_v2,1,,0.6748162984848023,0,0,0,0,0,0,0,0,1,1,0,0,1,Text2MultiHopQAGenerator
+1a_qa_basic,mcp_only,0,,0.6130183180173238,0,0,0,0,0,0,0,0,1,1,0,0,1,Text2MultiHopQAGenerator
+1a_qa_basic,mcp_only,1,,0.5927253325780233,0,0,0,0,0,0,0,0,2,1,0,0,1,Text2MultiHopQAGenerator
+2a_single_language_sentiment,dataflow_agent,0,1.0364829500516255,0.6097378094991048,1,0,1,0,0,0,0,0,1,1,0,15,15,PromptedEvaluator
+2a_single_language_sentiment,dataflow_agent,1,,0.6265335361162822,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,df_agent_v2,0,,0.6687333027521769,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,df_agent_v2,1,,0.7117846926053365,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,mcp_only,0,,0.5881888429323833,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,mcp_only,1,,0.6989953438440959,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+4a_score_and_filter,dataflow_agent,0,,0.6384255607922872,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedFilter
+4a_score_and_filter,dataflow_agent,1,,0.6335087815920512,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | GeneralFilter
+4a_score_and_filter,df_agent_v2,0,,0.62660178343455,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | GeneralFilter
+4a_score_and_filter,df_agent_v2,1,,0.8521507819493611,0,1,2,0,0,0,0,1,1,1,0,0,1,PandasOperator | PromptedEvaluator | PromptedFilter
+4a_score_and_filter,mcp_only,0,,0.7266096313794453,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | GeneralFilter
+4a_score_and_filter,mcp_only,1,,0.6394675731658935,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | PromptedFilter

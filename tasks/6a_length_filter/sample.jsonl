@@ -1,0 +1,10 @@
+{"text": "hi"}
+{"text": "this is a moderately long sentence that should pass the filter if the threshold is around 10 words."}
+{"text": "ok"}
+{"text": "A comprehensive analysis of renewable energy sources shows that solar and wind power are rapidly becoming cost-competitive with fossil fuels, driving major shifts in global energy markets."}
+{"text": "?"}
+{"text": "The quick brown fox jumps over the lazy dog. This is a classic pangram used for testing fonts and keyboards."}
+{"text": "no"}
+{"text": "Machine learning models require careful data curation, feature engineering, hyperparameter tuning, and rigorous evaluation on held-out test sets to generalize well."}
+{"text": "x"}
+{"text": "Climate change affects biodiversity, weather patterns, sea levels, and agricultural productivity on a global scale, with disproportionate impacts on vulnerable communities."}

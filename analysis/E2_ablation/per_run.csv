@@ -1,0 +1,181 @@
+task_id,method,repetition,time_min,time_to_pipeline_min,exec_success,operator_errors,strict_errors,field_errors,hallucinated,missing_required,wrong_order,unexpected,n_create_pipeline_calls,n_render_pipeline_calls,n_execute_pipeline_calls_by_agent,n_valid_records,n_total_records,final_chain
+1a_qa_basic,dataflow_agent,0,,4.546983965237936,0,3,1,0,0,1,0,2,1,1,0,0,1,ReasoningQuestionGenerator | ReasoningAnswerGenerator
+1a_qa_basic,dataflow_agent,1,,1.7056514620780945,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,dataflow_agent,2,,0.9899713476498921,0,2,1,0,0,1,0,1,1,1,0,0,1,PromptedGenerator
+1a_qa_basic,no_dag_sync,0,,1.283679433663686,0,2,1,0,0,1,0,1,1,1,0,0,1,AgenticRAGAtomicTaskGenerator
+1a_qa_basic,no_dag_sync,1,,3.117067547639211,0,2,1,0,0,1,0,1,1,0,0,0,1,CondorGenerator
+1a_qa_basic,no_dag_sync,2,,3.5195691029230756,0,2,1,0,0,1,0,1,1,0,0,0,1,PromptedGenerator
+1a_qa_basic,no_exec_gating,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,no_exec_gating,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,no_exec_gating,2,2.0229336698849996,1.3250770727793375,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,no_mcp,0,,0.8981298128763835,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+1a_qa_basic,no_mcp,1,3.2244279543558756,1.605528211593628,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,no_mcp,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+1a_qa_basic,no_skills,0,,3.2200484832127887,0,3,3,0,2,1,0,0,2,1,0,0,1,sft_generator | quality_filter
+1a_qa_basic,no_skills,1,1.8430130759874979,1.2825153668721516,0,2,1,0,0,1,0,1,1,1,0,0,8,SFTGeneratorSeed
+1a_qa_basic,no_skills,2,,1.1194730917612712,0,4,1,0,0,1,0,3,1,1,0,0,1,SFTGeneratorSeed | ReasoningQuestionGenerator | ReasoningAnswerGenerator
+1b_qa_with_filter,dataflow_agent,0,,1.4857472737630208,0,3,3,0,0,3,0,0,1,1,0,0,1,PromptedGenerator | PromptedEvaluator | GeneralFilter
+1b_qa_with_filter,dataflow_agent,1,,3.1822763522466024,0,7,3,0,0,3,0,4,1,1,0,0,1,ReasoningQuestionGenerator | ReasoningAnswerGenerator | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,dataflow_agent,2,,,0,3,3,0,0,3,0,0,0,0,0,0,0,
+1b_qa_with_filter,no_dag_sync,0,,3.152994672457377,0,6,3,0,0,3,0,3,1,0,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,no_dag_sync,1,,2.153585882981618,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,no_dag_sync,2,3.060282349586487,2.3665292104085287,0,6,3,0,0,3,0,3,1,0,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,no_exec_gating,0,,2.9752976417541506,0,5,4,0,1,3,0,1,2,1,0,0,1,PromptedGenerator | AlpagasusSampleEvaluator | QualityThresholdFilter
+1b_qa_with_filter,no_exec_gating,1,,2.3569283922513327,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,no_exec_gating,2,,1.5401986320813497,0,6,3,0,0,3,0,3,2,2,2,0,1,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,no_mcp,0,,3.4823754827181497,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | DeitaQualitySampleEvaluator | DeitaQualityFilter
+1b_qa_with_filter,no_mcp,1,,1.3170312523841858,0,6,3,0,0,3,0,3,1,1,0,0,1,SFTGeneratorSeed | RMFilter | AlpagasusFilter
+1b_qa_with_filter,no_mcp,2,3.8136131604512533,2.8182994802792867,0,6,3,0,0,3,0,3,1,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+1b_qa_with_filter,no_skills,0,,1.4417921940485636,0,6,3,0,0,3,0,3,2,1,0,0,1,ReasoningQuestionGenerator | ReasoningAnswerGenerator | ReasoningQuestionDifficultySampleEvaluator | GeneralFilter
+1b_qa_with_filter,no_skills,1,,1.2409162918726604,0,3,3,0,0,3,0,0,1,0,0,0,1,PromptedGenerator | PromptedGenerator | PromptedEvaluator | GeneralFilter
+1b_qa_with_filter,no_skills,2,4.758537423610687,3.2107449054718016,0,6,3,0,0,3,0,3,1,1,0,0,8,SFTGeneratorSeed | AlpagasusSampleEvaluator | AlpagasusFilter
+2a_single_language_sentiment,dataflow_agent,0,,2.705418252944946,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,dataflow_agent,1,,1.6763278643290203,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,dataflow_agent,2,,3.116950571537018,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,no_dag_sync,0,1.717259959379832,1.34990051984787,1,0,1,0,0,0,0,0,1,0,0,15,15,PromptedEvaluator
+2a_single_language_sentiment,no_dag_sync,1,,1.6926562587420146,0,0,1,0,0,0,0,0,1,0,0,0,1,PromptedEvaluator
+2a_single_language_sentiment,no_dag_sync,2,,2.3114106098810834,0,2,1,0,0,1,0,1,1,0,0,0,1,ReasoningAnswerGenerator
+2a_single_language_sentiment,no_exec_gating,0,4.935428714752197,1.2538694143295288,1,0,1,0,0,0,0,0,1,1,2,15,15,PromptedEvaluator
+2a_single_language_sentiment,no_exec_gating,1,,2.5966073274612427,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,no_exec_gating,2,3.290887888272603,1.349225600560506,1,0,1,0,0,0,0,0,2,1,0,15,15,PromptedEvaluator
+2a_single_language_sentiment,no_mcp,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,no_mcp,1,,1.3532099763552348,0,6,3,0,2,1,0,3,1,0,0,0,1,HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveExtraSpacesRefiner | LLMClassifier | QualityFilter
+2a_single_language_sentiment,no_mcp,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,no_skills,0,,4.051866769790649,0,0,0,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+2a_single_language_sentiment,no_skills,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+2a_single_language_sentiment,no_skills,2,,1.7103004614512125,0,2,1,0,0,1,0,1,1,1,0,0,1,ReasoningQuestionCategorySampleEvaluator
+2b_review_governance,dataflow_agent,0,,4.9787454803784685,0,4,2,0,0,2,0,2,2,1,0,0,1,LLMLanguageFilter | PromptedRefiner | AlpagasusSampleEvaluator | AlpagasusFilter
+2b_review_governance,dataflow_agent,1,2.5508576393127442,1.8585321108500164,1,0,2,0,0,0,0,0,1,1,0,18,18,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,dataflow_agent,2,,1.2025923411051431,0,5,3,0,0,2,0,3,1,1,0,0,1,LLMLanguageFilter | HtmlEntityRefiner | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | AlpagasusSampleEvaluator | AlpagasusFilter
+2b_review_governance,no_dag_sync,0,,1.979489763577779,0,3,3,0,0,1,0,2,1,0,0,0,1,LLMLanguageFilter | ContentNullFilter | HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | PromptedEvaluator | WordNumberFilter
+2b_review_governance,no_dag_sync,1,,4.1503533840179445,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_dag_sync,2,,2.9223700006802877,0,0,2,0,0,0,0,0,1,0,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_exec_gating,0,,1.7035684307416281,0,5,3,0,0,2,0,3,2,2,2,0,1,LLMLanguageFilter | HtmlEntityRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | AlpagasusSampleEvaluator | AlpagasusFilter
+2b_review_governance,no_exec_gating,1,,1.9665566722551981,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_exec_gating,2,,1.4268681168556214,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | PromptedFilter
+2b_review_governance,no_mcp,0,,2.398806083202362,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_mcp,1,,3.393286037445068,0,4,3,0,0,2,0,2,1,1,0,0,1,LLMLanguageFilter | HtmlUrlRemoverRefiner | AlpagasusSampleEvaluator | AlpagasusFilter
+2b_review_governance,no_mcp,2,,2.885346806049347,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_skills,0,,2.230650238196055,0,0,3,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | HtmlUrlRemoverRefiner | TextNormalizationRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_skills,1,,2.172613489627838,0,0,2,0,0,0,0,0,1,1,0,0,1,LLMLanguageFilter | PromptedRefiner | PromptedEvaluator | GeneralFilter
+2b_review_governance,no_skills,2,,1.8659849882125854,0,2,3,0,0,1,0,1,1,1,0,0,1,LLMLanguageFilter | TextNormalizationRefiner | PromptedEvaluator | CodeGenericScoreFilter
+3a_long_doc_summary,dataflow_agent,0,,1.6246320247650146,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator | PromptedGenerator
+3a_long_doc_summary,dataflow_agent,1,,1.1355333209037781,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator
+3a_long_doc_summary,dataflow_agent,2,,1.2777091066042583,0,1,0,0,0,0,0,1,1,1,0,0,1,ChunkedPromptedGenerator | FormatStrPromptedGenerator
+3a_long_doc_summary,no_dag_sync,0,,3.5098019162813823,0,1,1,0,0,0,0,1,1,1,0,0,1,KBCChunkGenerator | PromptedGenerator | PromptedGenerator
+3a_long_doc_summary,no_dag_sync,1,,2.4733487447102864,0,0,1,0,0,0,0,0,1,0,0,0,1,PromptedGenerator
+3a_long_doc_summary,no_dag_sync,2,,2.1766406575838726,0,5,1,0,0,1,0,4,1,1,0,0,1,SFTGeneratorSeed | HashDeduplicateFilter | ContentNullFilter | SentenceNumberFilter
+3a_long_doc_summary,no_exec_gating,0,,2.259853359063466,0,0,0,0,0,0,0,0,4,4,4,0,1,ChunkedPromptedGenerator
+3a_long_doc_summary,no_exec_gating,1,,1.0731612284978231,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+3a_long_doc_summary,no_exec_gating,2,,1.2461907426516214,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator | PromptedGenerator
+3a_long_doc_summary,no_mcp,0,,1.7629140774408976,0,0,1,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+3a_long_doc_summary,no_mcp,1,,2.5887428919474282,0,2,1,0,0,0,0,2,1,1,0,0,1,KBCChunkGenerator | PromptedGenerator | SFTGeneratorSeed
+3a_long_doc_summary,no_mcp,2,,1.710065205891927,0,3,1,0,0,1,0,2,1,1,0,0,1,SFTGeneratorSeed | SFTGeneratorSeed
+3a_long_doc_summary,no_skills,0,,2.0772941509882608,0,0,1,0,0,0,0,0,1,1,0,0,1,PromptedGenerator
+3a_long_doc_summary,no_skills,1,,2.4626763582229616,0,2,1,0,0,1,0,1,1,1,0,0,1,SFTGeneratorSeed
+3a_long_doc_summary,no_skills,2,,2.8001150250434876,0,0,0,0,0,0,0,0,1,1,0,0,1,ChunkedPromptedGenerator | PromptedGenerator
+3b_text_to_qa_chain,dataflow_agent,0,2.6846839507420857,1.7111628214518229,1,2,1,0,0,1,0,1,1,1,0,8,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,dataflow_agent,1,,1.779134484132131,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,dataflow_agent,2,,1.3210420608520508,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_dag_sync,0,,1.159747342268626,0,4,2,0,0,2,0,2,1,0,0,0,1,KBCTextCleanerBatch | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_dag_sync,1,,2.3766878883043927,0,4,2,0,0,2,0,2,1,0,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_dag_sync,2,,1.4552534580230714,0,4,2,0,0,2,0,2,1,0,0,0,1,KBCTextCleanerBatch | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_exec_gating,0,2.6995702346165973,1.8939204931259155,0,2,1,0,0,1,0,1,1,1,0,0,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_exec_gating,1,1.9843184034029642,1.397374697526296,1,4,2,0,0,2,0,2,1,1,0,8,8,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_exec_gating,2,,2.2325119336446124,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_mcp,0,,2.24986389875412,0,2,1,0,0,1,0,1,1,1,0,0,1,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_mcp,1,,0.8358684738477071,0,5,2,0,0,2,0,3,1,1,0,0,1,KBCTextCleanerBatch | KBCMultiHopQAGeneratorBatch | QAExtractor
+3b_text_to_qa_chain,no_mcp,2,3.971709163983663,2.8333306074142457,1,2,1,0,0,1,0,1,1,1,0,8,8,HtmlUrlRemoverRefiner | RemoveEmojiRefiner | RemoveExtraSpacesRefiner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_skills,0,,1.6483962416648865,0,4,2,0,0,2,0,2,2,1,0,0,1,KBCTextCleanerBatch | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_skills,1,,0.812860922018687,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleaner | KBCMultiHopQAGeneratorBatch
+3b_text_to_qa_chain,no_skills,2,,1.4176732778549195,0,4,2,0,0,2,0,2,1,1,0,0,1,KBCTextCleanerBatch | KBCMultiHopQAGeneratorBatch
+4a_score_and_filter,dataflow_agent,0,,1.967224399248759,0,3,2,0,0,2,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,dataflow_agent,1,,1.550038202603658,0,3,2,0,0,2,0,1,1,1,0,0,1,AlpagasusSampleEvaluator | GeneralFilter
+4a_score_and_filter,dataflow_agent,2,,1.3753199338912965,0,3,2,0,0,2,0,1,1,1,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,no_dag_sync,0,,2.4887356996536254,0,3,2,0,0,2,0,1,1,0,0,0,1,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,no_dag_sync,1,,1.5454299211502076,0,4,2,0,0,2,0,2,1,0,0,0,1,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,no_dag_sync,2,,5.372721409797668,0,4,2,0,0,2,0,2,1,0,0,0,1,MetaSampleEvaluator | CodeGenericScoreFilter
+4a_score_and_filter,no_exec_gating,0,,1.0686111569404602,0,0,2,0,0,0,0,0,1,1,0,0,1,PromptedEvaluator | GeneralFilter
+4a_score_and_filter,no_exec_gating,1,,1.0296874006589254,0,4,2,0,0,2,0,2,3,1,4,0,1,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,no_exec_gating,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,no_mcp,0,,0.998121194044749,0,4,2,0,0,2,0,2,1,1,0,0,1,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,no_mcp,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4a_score_and_filter,no_mcp,2,,1.3325842420260112,0,4,2,0,0,2,0,2,1,1,0,0,1,DeitaQualitySampleEvaluator | DeitaQualityFilter
+4a_score_and_filter,no_skills,0,1.9120192130406697,1.4359040141105652,0,3,2,0,0,2,0,1,1,1,0,0,0,FuncCallConversationSampleEvaluator | GeneralFilter
+4a_score_and_filter,no_skills,1,1.9778222600618998,1.2542264421780904,1,4,2,0,0,2,0,2,1,1,0,6,6,AlpagasusSampleEvaluator | AlpagasusFilter
+4a_score_and_filter,no_skills,2,,1.7437811096509297,0,4,2,0,0,2,0,2,1,1,0,0,1,DeitaQualitySampleEvaluator | DeitaQualityFilter
+4b_multidim_scoring,dataflow_agent,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,dataflow_agent,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,dataflow_agent,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_dag_sync,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_dag_sync,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_dag_sync,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_exec_gating,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_exec_gating,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_exec_gating,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_mcp,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_mcp,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_mcp,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_skills,0,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_skills,1,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+4b_multidim_scoring,no_skills,2,,,0,2,2,0,0,2,0,0,0,0,0,0,0,
+5a_field_rename,dataflow_agent,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,dataflow_agent,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,dataflow_agent,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_dag_sync,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_dag_sync,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_dag_sync,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_exec_gating,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_exec_gating,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_exec_gating,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_mcp,0,,0.47790029446283977,0,3,3,0,2,1,0,0,1,1,0,1,1,FieldRenamer | FieldAdder
+5a_field_rename,no_mcp,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_mcp,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_skills,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_skills,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5a_field_rename,no_skills,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,dataflow_agent,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,dataflow_agent,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,dataflow_agent,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_dag_sync,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_dag_sync,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_dag_sync,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_exec_gating,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_exec_gating,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_exec_gating,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_mcp,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_mcp,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_mcp,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_skills,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_skills,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+5b_nested_flatten,no_skills,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,dataflow_agent,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,dataflow_agent,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,dataflow_agent,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_dag_sync,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_dag_sync,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_dag_sync,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_exec_gating,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_exec_gating,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_exec_gating,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_mcp,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_mcp,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_mcp,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_skills,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_skills,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6a_length_filter,no_skills,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,dataflow_agent,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,dataflow_agent,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,dataflow_agent,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_dag_sync,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_dag_sync,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_dag_sync,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_exec_gating,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_exec_gating,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_exec_gating,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_mcp,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_mcp,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_mcp,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_skills,0,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_skills,1,,,0,1,1,0,0,1,0,0,0,0,0,0,0,
+6b_llm_semantic_filter,no_skills,2,,,0,1,1,0,0,1,0,0,0,0,0,0,0,

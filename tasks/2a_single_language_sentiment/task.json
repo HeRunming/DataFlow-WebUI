@@ -1,0 +1,49 @@
+{
+  "task_id": "2a_single_language_sentiment",
+  "category": "review_governance",
+  "difficulty": "easy",
+  "user_prompt": "我有一份英文电商评论 JSONL，每行有 product_name 和 review_text。请帮我构建一个 pipeline，为每条评论打一个情感标签（positive / neutral / negative）。只需要分类，不需要过滤。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "PromptedGenerator",
+      "slot": "sentiment",
+      "required": true,
+      "slot_ops": [
+        "PromptedGenerator",
+        "FormatStrPromptedGenerator",
+        "PromptedEvaluator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "product_name",
+    "review_text",
+    "sentiment"
+  ],
+  "acceptance": {
+    "schema": {
+      "product_name": "str",
+      "review_text": "str",
+      "sentiment|sentiment_label|label|sentiment_class|predicted_sentiment": "str"
+    },
+    "min_valid_records": 5,
+    "mode": "generate",
+    "value_checks": [
+      {
+        "kind": "in_set",
+        "field": "sentiment|sentiment_label|label|sentiment_class|predicted_sentiment",
+        "values": [
+          "positive",
+          "neutral",
+          "negative"
+        ]
+      },
+      {
+        "kind": "not_constant",
+        "field": "sentiment|sentiment_label|label|sentiment_class|predicted_sentiment"
+      }
+    ]
+  },
+  "notes": "Simplest LLM-op task. Agent should use a single PromptedGenerator."
+}

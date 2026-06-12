@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+results/
+logs/
+method_envs/
+*.log
+.DS_Store

@@ -1,0 +1,36 @@
+{
+  "task_id": "5a_field_rename",
+  "category": "schema_normalization",
+  "difficulty": "easy",
+  "user_prompt": "我有一份用户 JSONL，字段是 first_name、last_name、email_addr、phone_num。请帮我构建一个 pipeline 把字段重命名为 firstName、lastName、email、phone，同时新增一个 fullName 字段拼接 first_name 和 last_name。这个任务只需要确定性变换，不需要 LLM。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "PandasOperator",
+      "slot": "deterministic_transform",
+      "required": true,
+      "slot_ops": [
+        "PandasOperator"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "firstName",
+    "lastName",
+    "email",
+    "phone",
+    "fullName"
+  ],
+  "acceptance": {
+    "schema": {
+      "firstName": "str",
+      "lastName": "str",
+      "email": "str",
+      "phone": "any",
+      "fullName": "str"
+    },
+    "min_valid_records": 3,
+    "mode": "generate"
+  },
+  "notes": "Key: do NOT use LLM operators for deterministic transforms. Agent should pick PandasOperator alone. 'unexpected' ops other than PandasOperator will fail semantic match."
+}

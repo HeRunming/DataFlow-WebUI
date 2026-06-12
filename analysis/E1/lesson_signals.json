@@ -1,0 +1,30 @@
+{
+  "dataflow_agent": {
+    "n_runs": 70,
+    "avg_create_pipeline": 0.9571428571428572,
+    "avg_render_pipeline": 0.9,
+    "context_overflow_rate": 0.08571428571428572,
+    "pipeline_produced_rate": 0.9
+  },
+  "df_agent_v2": {
+    "n_runs": 60,
+    "avg_create_pipeline": 0.8833333333333333,
+    "avg_render_pipeline": 0.85,
+    "context_overflow_rate": 0.21666666666666667,
+    "pipeline_produced_rate": 0.8333333333333334
+  },
+  "direct_cc": {
+    "n_runs": 68,
+    "avg_create_pipeline": 0,
+    "avg_render_pipeline": 0,
+    "context_overflow_rate": 0.0,
+    "pipeline_produced_rate": 0.0
+  },
+  "mcp_only": {
+    "n_runs": 70,
+    "avg_create_pipeline": 1.0571428571428572,
+    "avg_render_pipeline": 0.9571428571428572,
+    "context_overflow_rate": 0.05714285714285714,
+    "pipeline_produced_rate": 0.9714285714285714
+  }
+}

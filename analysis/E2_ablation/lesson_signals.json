@@ -1,0 +1,37 @@
+{
+  "dataflow_agent": {
+    "n_runs": 36,
+    "avg_create_pipeline": 0.5833333333333334,
+    "avg_render_pipeline": 0.5555555555555556,
+    "context_overflow_rate": 0.027777777777777776,
+    "pipeline_produced_rate": 0.5555555555555556
+  },
+  "no_dag_sync": {
+    "n_runs": 36,
+    "avg_create_pipeline": 0.5833333333333334,
+    "avg_render_pipeline": 0.1388888888888889,
+    "context_overflow_rate": 0.0,
+    "pipeline_produced_rate": 0.5833333333333334
+  },
+  "no_exec_gating": {
+    "n_runs": 36,
+    "avg_create_pipeline": 0.75,
+    "avg_render_pipeline": 0.6388888888888888,
+    "context_overflow_rate": 0.027777777777777776,
+    "pipeline_produced_rate": 0.5
+  },
+  "no_mcp": {
+    "n_runs": 36,
+    "avg_create_pipeline": 0.5,
+    "avg_render_pipeline": 0.4722222222222222,
+    "context_overflow_rate": 0.05555555555555555,
+    "pipeline_produced_rate": 0.5
+  },
+  "no_skills": {
+    "n_runs": 36,
+    "avg_create_pipeline": 0.6388888888888888,
+    "avg_render_pipeline": 0.5277777777777778,
+    "context_overflow_rate": 0.027777777777777776,
+    "pipeline_produced_rate": 0.5555555555555556
+  }
+}

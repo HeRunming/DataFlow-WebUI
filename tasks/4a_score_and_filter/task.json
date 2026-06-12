@@ -1,0 +1,61 @@
+{
+  "task_id": "4a_score_and_filter",
+  "category": "multifield_scoring",
+  "difficulty": "medium",
+  "user_prompt": "我有一份 QA 数据集 JSONL，每行有 question 和 answer 两个字段。请帮我构建一个 pipeline：基于 question 和 answer 同时对每条 QA 的答案质量打 1-5 分，然后过滤掉分数低于 3 的记录。",
+  "sample_path": "sample.jsonl",
+  "expected_chain": [
+    {
+      "op": "FormatStrPromptedGenerator",
+      "slot": "multi_field_score",
+      "required": true,
+      "slot_ops": [
+        "FormatStrPromptedGenerator",
+        "PromptedGenerator",
+        "PromptedEvaluator",
+        "Text2QASampleEvaluator",
+        "AlpagasusSampleEvaluator",
+        "AlpagasusFilter",
+        "PromptedFilter"
+      ]
+    },
+    {
+      "op": "GeneralFilter",
+      "slot": "filter",
+      "required": false,
+      "slot_ops": [
+        "GeneralFilter",
+        "PromptedFilter"
+      ]
+    }
+  ],
+  "expected_fields_produced": [
+    "question",
+    "answer",
+    "quality_score"
+  ],
+  "acceptance": {
+    "schema": {
+      "question": "str",
+      "answer": "str",
+      "quality_score|answer_quality_score|score|AlpagasusScore|quality|answer_score|qa_score": "float"
+    },
+    "min_valid_records": 2,
+    "mode": "filter",
+    "value_checks": [
+      {
+        "kind": "range",
+        "field": "quality_score|answer_quality_score|score|AlpagasusScore|quality|answer_score|qa_score",
+        "min": 1,
+        "max": 5
+      },
+      {
+        "kind": "predicate",
+        "field": "quality_score|answer_quality_score|score|AlpagasusScore|quality|answer_score|qa_score",
+        "op": ">=",
+        "value": 3
+      }
+    ]
+  },
+  "notes": "Skill decision table: multi-field score -> FormatStrPromptedGenerator (not multiple PromptedGenerators). filter -> GeneralFilter on computed numeric field."
+}
