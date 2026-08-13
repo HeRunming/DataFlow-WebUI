@@ -39,6 +39,7 @@ class Settings(BaseSettings):
         "Code Code To Sft Data Pipeline",
         "Code Gen Dataset Pipeline",
         "Func Call Synthesis",
+        "Kbcleaning Pipeline",
         "Reasoning General Pipeline",
         "Reasoning Math Pipeline",
         "Reasoning Pretrain Pipeline",
