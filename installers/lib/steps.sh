@@ -6,10 +6,23 @@
 # Each must honour DF_DRY_RUN by printing what it would do and changing nothing.
 
 # ---------- python ----------------------------------------------------------
+df_uv_system_flag() {
+  # uv refuses to install into a target that is not a virtual environment
+  # unless --system is passed. A real venv/virtualenv has sys.prefix !=
+  # sys.base_prefix; a conda environment and a plain system/native Python do
+  # not, and both need --system. Passing --system alongside --python <interp>
+  # simply lifts uv's venv guard and installs into that interpreter's
+  # site-packages — correct for conda and native Python alike.
+  if "$DF_PYTHON" -c 'import sys; sys.exit(0 if sys.prefix != sys.base_prefix else 1)' 2>/dev/null; then
+    return 0   # in a venv → no flag
+  fi
+  printf -- '--system'
+}
+
 df_pip_install() {
   if [[ "${DF_DRY_RUN:-0}" -eq 1 ]]; then
     if [[ "${DF_PYTHON_INSTALLER:-uv}" == "uv" ]]; then
-      plan "uv pip install --python $DF_PYTHON $*"
+      plan "uv pip install --python $DF_PYTHON $(df_uv_system_flag) $*"
     else
       plan "$DF_PYTHON -m pip install $*"
     fi
@@ -19,7 +32,7 @@ df_pip_install() {
   [[ "${DF_VERBOSE:-0}" -eq 1 ]] && quiet=""
   if [[ "${DF_PYTHON_INSTALLER:-uv}" == "uv" ]]; then
     # shellcheck disable=SC2086
-    uv pip install --python "$DF_PYTHON" $quiet "$@"
+    uv pip install --python "$DF_PYTHON" $(df_uv_system_flag) $quiet "$@"
   else
     # shellcheck disable=SC2086
     "$DF_PYTHON" -m pip install $quiet "$@"
@@ -97,6 +110,7 @@ df_build_frontend() {
 # ---------- skills ----------------------------------------------------------
 df_skill_ids_for_layers() {
   # df_skill_ids_for_layers <layer>... — ids from the manifest matching layers
+  # Strip CR for Windows compatibility
   "$DF_PYTHON" -c '
 import json, sys
 manifest = json.load(open(sys.argv[1], encoding="utf-8"))
@@ -104,7 +118,7 @@ layers = set(sys.argv[2:])
 for s in manifest["skills"]:
     if s["layer"] in layers:
         print(s["id"])
-' "$DF_REPO_ROOT/installers/skills.manifest.json" "$@"
+' "$DF_REPO_ROOT/installers/skills.manifest.json" "$@" | tr -d '\r'
 }
 
 df_receipt_add() {
@@ -128,12 +142,13 @@ df_receipt_lookup() {
 df_managed_ids() {
   # Every skill id this repo ships. Anything else found in a skills directory
   # belongs to the user and is never touched.
+  # Strip CR for Windows compatibility
   "$DF_PYTHON" -c '
 import json, sys
 m = json.load(open(sys.argv[1], encoding="utf-8"))
 for s in m["skills"]:
     print(s["id"])
-' "$DF_REPO_ROOT/installers/skills.manifest.json"
+' "$DF_REPO_ROOT/installers/skills.manifest.json" | tr -d '\r'
 }
 
 df_install_one_asset() {

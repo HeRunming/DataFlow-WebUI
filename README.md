@@ -70,14 +70,13 @@ and startup. Python **3.10 is recommended and is the minimum supported version**
 
 ### Install prerequisites
 
-You need Git, Python 3.10+, Node.js 20+ (which includes npm), and uv. Suggested
-system installation methods:
+You need Git, Python 3.10+, and Node.js 20+ (which includes npm) for the `webui` profile. The `harness` profile needs Python 3.10+ only. The `skills` profile needs Python 3.9+ only (no packages installed). The installer will offer to install `uv` (the recommended Python package manager) if missing; you can also install it manually or use `--pip` to fall back to pip.
 
-| System | Python and Git | Node.js 20+ and npm | uv |
+| System | Python and Git | Node.js 20+ and npm | uv (optional — installer can add it) |
 |---|---|---|---|
 | macOS | `brew install python@3.10 git` | `brew install nvm` then `nvm install 20` | `brew install uv` |
 | Ubuntu/Debian | `sudo apt update && sudo apt install -y python3.10 python3.10-venv git` | [nvm](https://github.com/nvm-sh/nvm), then `nvm install 20` | [uv installer](https://docs.astral.sh/uv/getting-started/installation/) |
-| Windows PowerShell | `winget install Python.Python.3.10 Git.Git` | `winget install OpenJS.NodeJS.LTS` | [PowerShell installer](https://docs.astral.sh/uv/getting-started/installation/) |
+| Windows | `winget install Python.Python.3.10 Git.Git` | `winget install OpenJS.NodeJS.LTS` | [PowerShell installer](https://docs.astral.sh/uv/getting-started/installation/) or let the installer add it |
 
 On macOS/Linux, the uv installer is:
 
@@ -91,8 +90,11 @@ On Windows PowerShell:
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Restart the terminal after installing tools, then verify `python --version`,
-`node --version` (must be 20 or newer), `npm --version`, and `uv --version`.
+Restart the terminal after installing tools, then verify:
+- `python --version` (or `python3 --version`)
+- `node --version` (must be 20 or newer, only for `webui`)
+- `npm --version` (only for `webui`)
+- `uv --version` (optional — the installer will offer to add it if missing)
 
 ### Create and activate a Python environment
 
@@ -109,8 +111,16 @@ conda activate dataflow
 ```
 
 On Ubuntu/Debian, install `python3.10-venv` if `venv` reports that `ensurepip`
-is missing. On Windows, use `py -3.10 -m venv .venv` and activate it from
-PowerShell; `.sh` files do not run in plain `cmd.exe`.
+is missing.
+
+**On Windows**, the install script (`.sh` files) must be run through **Git Bash** (bundled with Git for Windows). Do not run `.sh` files in PowerShell or `cmd.exe` — they will not execute. After installing Git for Windows, open **Git Bash** from the Start menu or right-click in the repository folder and select "Git Bash Here", then run:
+
+```bash
+# In Git Bash (Windows) or any terminal (macOS/Linux)
+./install.sh --profile webui
+```
+
+If you activated a conda environment in PowerShell before opening Git Bash, the environment carries over. Otherwise, ensure the Python you want is on PATH or set `DF_PYTHON=python` (or `DF_PYTHON=/c/path/to/python.exe`) before running `./install.sh`.
 
 ### Install, start, and use
 
@@ -120,14 +130,18 @@ PowerShell; `.sh` files do not run in plain `cmd.exe`.
 # or: ./scripts/start.sh --daemon
 ```
 
+**Windows users**: run these commands in **Git Bash**, not PowerShell or cmd.exe.
+
 Open <http://localhost:8000/>. In the chat panel select an installed agent,
 describe the pipeline you want, and inspect the resulting DAG on the canvas.
 Check or stop a background server with `./scripts/start.sh --status` and
 `./scripts/start.sh --stop`.
 
-uv is the default Python package installer. If your environment requires pip,
-use `./install.sh --profile webui --pip` (or the compatibility
-`./scripts/setup_all.sh --pip`).
+The installer uses `uv` by default (faster, more reliable). If `uv` is not installed, the installer will offer to install it automatically. To use `pip` instead, pass `--pip`:
+
+```bash
+./install.sh --profile webui --pip
+```
 
 ### Configure an AI agent
 

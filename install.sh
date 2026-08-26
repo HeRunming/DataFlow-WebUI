@@ -297,11 +297,67 @@ for ((i = 0; i < prereq_count; i++)); do
 done
 
 # The skills-only profile installs no packages. Runtime profiles use uv by
-# default, while --pip keeps a compatible escape hatch for restricted systems.
+# default. If uv is missing, offer to install it (interactive) or explain the
+# fallback. This is skipped under --check/--dry-run, which only report.
+df_ensure_uv() {
+  # Try to make uv available. Returns 0 if uv is usable afterwards, 1 otherwise.
+  # Honours a non-interactive session (no TTY): auto-installs rather than
+  # blocking forever on a prompt that can never be answered.
+  command -v uv &>/dev/null && return 0
+
+  # uv's installer drops the binary here; it may already exist from a prior run
+  # but not yet be on PATH for this shell.
+  local uv_bin="$HOME/.local/bin"
+  if [[ -x "$uv_bin/uv" ]]; then
+    export PATH="$uv_bin:$PATH"
+    command -v uv &>/dev/null && { ok "uv found in $uv_bin"; return 0; }
+  fi
+
+  warn "uv not found — it is the recommended Python package installer (faster, more reliable)"
+
+  local do_install=0
+  if [[ -t 0 ]]; then
+    printf '\n  %sInstall uv now?%s  [Y/n] (or re-run with --pip to use pip instead) ' "$C_BOLD" "$C_RESET"
+    local reply=""
+    read -r reply
+    [[ -z "$reply" || "$reply" =~ ^[Yy] ]] && do_install=1
+  else
+    # No interactive terminal (piped, CI, agent). Auto-install rather than hang.
+    info "no interactive terminal — installing uv automatically (pass --pip to skip)"
+    do_install=1
+  fi
+
+  if [[ "$do_install" -ne 1 ]]; then
+    err "uv is required with default settings — re-run with --pip to use pip instead"
+    return 1
+  fi
+
+  info "Installing uv from https://astral.sh/uv/install.sh ..."
+  if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
+    err "uv installation failed — check your network/proxy, or re-run with --pip"
+    return 1
+  fi
+  # The installer writes to ~/.local/bin (or ~/.cargo/bin on some setups).
+  export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+  if command -v uv &>/dev/null; then
+    ok "uv installed: $(uv --version 2>/dev/null)"
+    return 0
+  fi
+  err "uv installed but not on PATH — open a new shell and re-run, or use --pip"
+  return 1
+}
+
 if [[ "$DF_PROFILE" != "skills" ]]; then
   if [[ "$DF_PYTHON_INSTALLER" == "uv" ]]; then
-    df_check_prereq "uv" "uv --version" "" "install Python packages" \
-      || PREREQ_FAILED=$((PREREQ_FAILED + 1))
+    if command -v uv &>/dev/null; then
+      df_check_prereq "uv" "uv --version" "" "install Python packages" \
+        || PREREQ_FAILED=$((PREREQ_FAILED + 1))
+    elif [[ "$DF_CHECK_ONLY" -eq 1 || "$DF_DRY_RUN" -eq 1 ]]; then
+      # Report-only modes never install or prompt.
+      warn "uv not found — the real install will offer to install it, or use --pip"
+    else
+      df_ensure_uv || PREREQ_FAILED=$((PREREQ_FAILED + 1))
+    fi
   else
     df_check_prereq "pip" "$DF_PYTHON -m pip --version" "" "install Python packages" \
       || PREREQ_FAILED=$((PREREQ_FAILED + 1))
