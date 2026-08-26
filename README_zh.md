@@ -60,20 +60,23 @@ cd DataFlow-WebUI
 
 `webui` profile 会安装完整的浏览器端栈。以下命令都在仓库根目录执行，
 安装和启动应使用同一个已激活的环境。Python 推荐 3.10，最低要求也是
-3.10；另外需要 Node.js 20+、npm、Git 和 uv。
+3.10；`webui` 需要 Node.js 20+、npm、Git；`harness` 仅需 Python 3.10+；`skills` 仅需 Python 3.9+（不安装任何包）。安装器默认使用 `uv`（更快更可靠），若未安装会自动提示安装，也可手动安装或传 `--pip` 回退到 pip。
 
 各系统推荐安装方式：
 
-| 系统 | Python / Git | Node.js 20+ / npm | uv |
+| 系统 | Python / Git | Node.js 20+ / npm | uv（可选 —— 安装器可自动添加） |
 |---|---|---|---|
 | macOS | `brew install python@3.10 git` | nvm，然后 `nvm install 20` | `brew install uv` |
 | Ubuntu/Debian | `sudo apt update && sudo apt install -y python3.10 python3.10-venv git` | [nvm](https://github.com/nvm-sh/nvm)，然后 `nvm install 20` | [uv 安装器](https://docs.astral.sh/uv/getting-started/installation/) |
-| Windows PowerShell | `winget install Python.Python.3.10 Git.Git` | `winget install OpenJS.NodeJS.LTS` | [PowerShell 安装器](https://docs.astral.sh/uv/getting-started/installation/) |
+| Windows | `winget install Python.Python.3.10 Git.Git` | `winget install OpenJS.NodeJS.LTS` | [PowerShell 安装器](https://docs.astral.sh/uv/getting-started/installation/) 或由安装器自动添加 |
 
 macOS/Linux 可执行 `curl -LsSf https://astral.sh/uv/install.sh | sh` 安装 uv；
 Windows PowerShell 可执行 `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`。
-安装后重启终端，并确认 `python --version`、`node --version`（20+）、
-`npm --version` 和 `uv --version` 可用。
+安装后重启终端，并确认：
+- `python --version`（或 `python3 --version`）
+- `node --version`（20+，仅 `webui` 需要）
+- `npm --version`（仅 `webui` 需要）
+- `uv --version`（可选 —— 安装器缺失时会提示添加）
 
 二选一创建 Python 环境：
 
@@ -87,6 +90,15 @@ conda create -n dataflow python=3.10 -y
 conda activate dataflow
 ```
 
+**Windows 用户注意**：安装脚本（`.sh` 文件）必须在 **Git Bash** 中运行（Git for Windows 自带），不能在 PowerShell 或 cmd.exe 中运行。安装 Git for Windows 后，从开始菜单打开 Git Bash，或在仓库文件夹右键选择 "Git Bash Here"，然后执行：
+
+```bash
+# 在 Git Bash（Windows）或任意终端（macOS/Linux）中运行
+./install.sh --profile webui
+```
+
+如果在 PowerShell 中激活了 conda 环境后再打开 Git Bash，环境会自动继承。否则请确保想用的 Python 在 PATH 中，或在运行 `./install.sh` 前设置 `DF_PYTHON=python`（或 `DF_PYTHON=/c/path/to/python.exe`）。
+
 然后安装并启动：
 
 ```bash
@@ -94,9 +106,14 @@ conda activate dataflow
 ./scripts/start.sh             # 或 ./scripts/start.sh --daemon
 ```
 
+**Windows 用户**：在 **Git Bash** 中运行这些命令，不是 PowerShell 或 cmd.exe。
+
 浏览器打开 <http://localhost:8000/>，在聊天面板选择 Agent，描述想要的
-数据管线并在画布中检查结果。uv 是默认 Python 包管理器；若必须使用 pip，
-执行 `./install.sh --profile webui --pip`。
+数据管线并在画布中检查结果。安装器默认使用 `uv`（更快更可靠），若未安装会提示自动添加。若需使用 `pip`，传 `--pip`：
+
+```bash
+./install.sh --profile webui --pip
+```
 
 ### 配置 AI Agent
 

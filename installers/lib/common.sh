@@ -29,6 +29,7 @@ debug() { [[ "${DF_VERBOSE:-0}" -eq 1 ]] && printf '%s[%s] %s%s\n' "$C_DIM" "$DF
 # so manifest reads go through python3, which every profile already needs.
 df_json() {
   # df_json <file> <python-expression-on-`d`>
+  # Strip CR from output for Windows compatibility where Python writes CRLF
   local file="$1" expr="$2"
   python3 -c '
 import json, sys
@@ -40,12 +41,13 @@ if isinstance(out, (list, tuple)):
         print(item)
 elif out is not None:
     print(out)
-' "$file" "$expr"
+' "$file" "$expr" | tr -d '\r'
 }
 
 # ---------- prerequisite checks --------------------------------------------
 df_version_ge() {
   # df_version_ge <have> <want> — numeric dotted compare, no external tools
+  # Strip CR for Windows compatibility
   python3 -c '
 import sys
 def parse(v):
@@ -62,7 +64,7 @@ def parse(v):
 have, want = parse(sys.argv[1]), parse(sys.argv[2])
 have += [0] * (len(want) - len(have))
 sys.exit(0 if have >= want[: len(have)] else 1)
-' "$1" "$2"
+' "$1" "$2" | tr -d '\r'
 }
 
 df_check_prereq() {

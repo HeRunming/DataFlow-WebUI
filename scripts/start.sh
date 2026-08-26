@@ -17,6 +17,11 @@ BACKEND_DIR="$WEBUI_ROOT/backend"
 PID_FILE="$WEBUI_ROOT/.backend.pid"
 PORT="${DATAFLOW_PORT:-8000}"
 HOST="${DATAFLOW_HOST:-0.0.0.0}"
+# Use the same interpreter the install was run with. Defaults to python3, but
+# DATAFLOW_PYTHON must be honoured here too: on Windows/Git Bash `python3` often
+# resolves to a different (Store) Python than the venv/conda env that was
+# installed into, so hardcoding it would fail to import the backend.
+DF_PYTHON="${DATAFLOW_PYTHON:-python3}"
 
 # ---------- color helpers ---------------------------------------------------
 # Only the colours this script actually prints. (C_YELLOW and C_BOLD were
@@ -34,9 +39,15 @@ err()   { printf '%s[start]%s %sERROR%s  %s\n' "$C_BLUE"   "$C_RESET" "$C_RED"  
 
 # ---------- pre-flight checks ----------------------------------------------
 preflight() {
-  # Check Python can import the app
-  if ! python3 -c "import sys; sys.path.insert(0,'$BACKEND_DIR'); import app.main" 2>/dev/null; then
-    err "Cannot import app.main. Run ./install.sh --profile harness first."
+  # Check Python can import the app, using the selected interpreter. Import from
+  # inside BACKEND_DIR — the same cwd uvicorn runs with — rather than injecting
+  # sys.path. A Windows-native Python (conda) does not understand a MinGW-style
+  # "/d/..." path, so sys.path.insert with a Git Bash path would silently fail
+  # to make `app` importable even when the install is fine.
+  if ! ( cd "$BACKEND_DIR" && "$DF_PYTHON" -c "import app.main" ) >/dev/null 2>&1; then
+    err "Cannot import app.main with '$DF_PYTHON'. Run ./install.sh --profile harness first."
+    err "  If you installed into a specific env, set DATAFLOW_PYTHON to its python, e.g.:"
+    err "    DATAFLOW_PYTHON=/path/to/env/python ./scripts/start.sh --daemon"
     exit 1
   fi
 
@@ -69,14 +80,14 @@ cmd_start_foreground() {
   info "Starting backend (foreground) on $HOST:$PORT ..."
   info "Press Ctrl+C to stop."
   cd "$BACKEND_DIR"
-  exec uvicorn app.main:app --reload --port "$PORT" --reload-dir app --host "$HOST"
+  exec "$DF_PYTHON" -m uvicorn app.main:app --reload --port "$PORT" --reload-dir app --host "$HOST"
 }
 
 cmd_start_daemon() {
   preflight
   info "Starting backend (daemon) on $HOST:$PORT ..."
   cd "$BACKEND_DIR"
-  nohup uvicorn app.main:app --port "$PORT" --host "$HOST" \
+  nohup "$DF_PYTHON" -m uvicorn app.main:app --port "$PORT" --host "$HOST" \
     > "$WEBUI_ROOT/.backend.log" 2>&1 &
   local pid=$!
   echo "$pid" > "$PID_FILE"
