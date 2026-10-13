@@ -31,6 +31,10 @@ class Settings(BaseSettings):
     CACHE_DIR: str = os.path.join(BASE_DIR, "cache_local") # cache directory for pipeline execution
     RESOURCE_DIR: str = "data"  # resource directory for storing schemas and other resources
     DEFAULT_SERVING_FILLING: bool = True # whether to fill default values for missing fields in serving
+    # Media files referenced by dataset records may live anywhere on disk. When this list is
+    # non-empty, the media endpoints only serve files under one of these directories.
+    MEDIA_ALLOWED_ROOTS: list[str] = []
+    MEDIA_SAMPLE_ROWS: int = 20  # rows sampled for field-modality inference / media validation
 
     # white list of preset pipelines that can be shown in the frontend pipeline template list
     _PRESET_PIPELINE_NAME_WHITELIST = {

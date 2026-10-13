@@ -2,12 +2,12 @@
     <div class="table-wrapper" :class="[{ dark: theme == 'dark' }]">
         <i v-show="!tableInfo.length" class="empty-icon ms-Icon ms-Icon--Important"></i>
         <p v-show="!tableInfo.length" class="empty-title">{{ local('No Data') }}</p>
-        <fv-details-list :theme="theme" v-show="tableInfo.length" :model-value="tableInfo" :head="heads" ref="table"
+        <fv-details-list :theme="theme" v-show="tableInfo.length" :model-value="rows" :head="heads" ref="table"
             style="width: 100%; height: 100%">
             <template v-for="(col, i) in heads" :key="i + 1" v-slot:[`column_${i}`]="x">
-                <p :title="i == 0 ? x.row_index + 1 : x.item[col.key] ? x.item[col.key] : ''">
-                    {{ i == 0 ? x.row_index + 1 : x.item[col.key] ? x.item[col.key] : '' }}
-                </p>
+                <p v-if="i == 0">{{ x.item.__row + 1 }}</p>
+                <media-cell v-else :value="x.item[col.key]" :field="col.key" :row="x.item.__row"
+                    :source="mediaSource"></media-cell>
             </template>
         </fv-details-list>
     </div>
@@ -17,12 +17,21 @@
 import { mapState } from 'pinia'
 import { useAppConfig } from '@/stores/appConfig'
 import { useTheme } from '@/stores/theme';
+import mediaCell from '../../common/mediaCell.vue'
 
 export default {
+    components: {
+        mediaCell
+    },
     props: {
         tableInfo: {
             type: Object,
             default: () => []
+        },
+        // { type: 'task', taskId, step, node } — lets media cells fetch referenced files
+        mediaSource: {
+            type: Object,
+            default: null
         }
     },
     data() {
@@ -40,7 +49,10 @@ export default {
     },
     computed: {
         ...mapState(useAppConfig, ['local']),
-        ...mapState(useTheme, ['theme'])
+        ...mapState(useTheme, ['theme']),
+        rows() {
+            return this.tableInfo.map((record, idx) => ({ ...record, __row: idx }))
+        }
     },
     mounted() {
         this.getHeads()
@@ -56,6 +68,7 @@ export default {
                 width: 60
             })
             for (let key in this.tableInfo[0]) {
+                if (key === '__row') continue
                 heads.push({
                     key,
                     content: key,

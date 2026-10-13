@@ -32,6 +32,15 @@
                 style="width: 100%; height: 35px"></fv-text-box>
         </div>
         <kv-input v-if="computedUIType === 'kv_input'" v-model="thisValue"></kv-input>
+        <!-- Multimodal params: input_image_key (column name) or *_image_path (file path) -->
+        <div v-if="computedUIType === 'media'" class="value-input__media">
+            <span class="value-input__media-badge" :class="mediaModality">{{ local(mediaModality) }}</span>
+            <fv-text-box :theme="theme" v-model="thisValue"
+                :placeholder="isFieldKeyParam(itemObj.name) ? local('Please input') + ` ${itemObj.name}` : local('Media file path')"
+                font-size="12" border-radius="3" border-width="2" :reveal-border="true"
+                :border-color="thisData.shadowColor" :focus-border-color="thisData.borderColor" underline
+                style="flex: 1; height: 35px"></fv-text-box>
+        </div>
     </div>
 </template>
 
@@ -41,6 +50,7 @@ import { useDataflow } from '@/stores/dataflow'
 import { mapState, mapActions } from 'pinia'
 
 import kvInput from './kvInput.vue';
+import { inferParamModality, isMediaModality } from '@/js/mediaModalities.js'
 
 // Parameter names that should render the JSON Schema picker.
 // Match exact names and *_schema suffix.
@@ -100,7 +110,12 @@ export default {
             }
             if (this.itemObj.kind === 'VAR_KEYWORD')
                 return 'kv_input'
+            if (isMediaModality(this.mediaModality))
+                return 'media'
             return 'text'
+        },
+        mediaModality() {
+            return inferParamModality(this.itemObj.name)
         }
     },
     mounted() {
@@ -110,6 +125,9 @@ export default {
     },
     methods: {
         ...mapActions(useDataflow, ['getJsonSchemaList']),
+        isFieldKeyParam(name) {
+            return /_keys?$/.test(name || '')
+        },
         isJsonSchemaParam(name) {
             if (!name) return false
             if (JSON_SCHEMA_PARAM_NAMES.has(name)) return true
@@ -168,6 +186,30 @@ export default {
         width: 100%;
         display: flex;
         flex-direction: column;
+    }
+
+    .value-input__media {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .value-input__media-badge {
+        flex-shrink: 0;
+        padding: 1px 6px;
+        font-size: 11px;
+        border-radius: 8px;
+        color: white;
+        background: rgba(111, 92, 196, 1);
+
+        &.audio {
+            background: rgba(0, 153, 136, 1);
+        }
+
+        &.video {
+            background: rgba(214, 102, 46, 1);
+        }
     }
 }
 </style>

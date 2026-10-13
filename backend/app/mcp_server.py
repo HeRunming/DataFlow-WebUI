@@ -43,6 +43,7 @@ def create_mcp_server(app: FastAPI) -> FastApiMCP:
             "list_datasets",                    # GET /api/v1/datasets/
             "get_dataset_columns",              # GET /api/v1/datasets/columns/{ds_id}
             "get_dataset_preview",              # GET /api/v1/datasets/preview/{ds_id}  ← 必须在设置 lang 等语义参数前调用，agent 凭样本判断数据语言
+            "get_field_modalities",             # GET /api/v1/datasets/{ds_id}/field_modalities  ← 多模态：哪些字段是图片/音频/视频路径
             "register_dataset",                 # POST /api/v1/datasets/
             "list_serving",                     # GET /api/v1/serving/
             "list_servings",                    # GET /api/v1/serving/plural_alias (backward-compatible alias)

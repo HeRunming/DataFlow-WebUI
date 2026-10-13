@@ -45,6 +45,9 @@
                             :class="{ active: selectedCol === col, dark: theme === 'dark' }"
                             @click="selectedCol = col">
                             {{ col }}
+                            <span v-if="isMediaModality(columnModalities[col])" class="col-tab-badge">
+                                {{ local(columnModalities[col]) }}
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -69,6 +72,8 @@ import {
     Tooltip
 } from 'chart.js'
 
+import { infer_field_modalities, isMediaModality, mediaBucket } from '@/js/mediaModalities.js'
+
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip)
 
 export default {
@@ -90,16 +95,21 @@ export default {
     computed: {
         ...mapState(useAppConfig, ['local']),
         ...mapState(useTheme, ['theme']),
+        columnModalities() {
+            return infer_field_modalities(this.previewData)
+        },
         distribution() {
             if (!this.selectedCol || !this.previewData.length) return { labels: [], values: [] }
+            // media paths are almost all unique; bucket them by file type instead
+            const isMedia = isMediaModality(this.columnModalities[this.selectedCol])
             const freq = {}
             for (const row of this.previewData) {
                 const raw = row[this.selectedCol]
-                const val = raw === null || raw === undefined
-                    ? '(null)'
-                    : typeof raw === 'object'
-                        ? JSON.stringify(raw)
-                        : String(raw)
+                let val
+                if (raw === null || raw === undefined) val = '(null)'
+                else if (isMedia) val = raw === '' ? '(null)' : mediaBucket(raw)
+                else if (typeof raw === 'object') val = JSON.stringify(raw)
+                else val = String(raw)
                 const key = val.length > 40 ? val.slice(0, 40) + '…' : val
                 freq[key] = (freq[key] || 0) + 1
             }
@@ -132,6 +142,7 @@ export default {
         this.chartInstance?.destroy()
     },
     methods: {
+        isMediaModality,
         fetchPreview() {
             if (!this.item.id) return
             this.loadingChart = true
@@ -251,6 +262,15 @@ export default {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 4px;
+
+                .col-tab-badge {
+                    margin-left: 4px;
+                    padding: 0 5px;
+                    font-size: 10px;
+                    border-radius: 6px;
+                    color: white;
+                    background: rgba(111, 92, 196, 1);
+                }
 
                 .col-tab {
                     padding: 2px 8px;

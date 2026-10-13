@@ -260,6 +260,32 @@ class DatasetRegistry:
         
         return preview_list
     
+    def read_record(self, ds_id: str, row: int) -> Dict | None:
+        """读取第 row 行（0-based）记录，超出范围返回 None。jsonl 流式读取，不整文件加载。"""
+        ds = self.get(ds_id)
+        if not ds:
+            raise FileNotFoundError(f"Dataset with id {ds_id} not found")
+        if row < 0:
+            return None
+        if ds.get("type", "").lower() == "jsonl":
+            with open(ds["root"], "r", encoding="utf-8") as f:
+                idx = 0
+                for line in f:
+                    if not line.strip():
+                        continue
+                    if idx == row:
+                        return json.loads(line)
+                    idx += 1
+            return None
+        records = self.preview(ds_id, row + 1)
+        return records[row] if row < len(records) else None
+
+    def get_field_modalities(self, ds_id: str, sample_rows: int | None = None) -> Dict[str, str]:
+        """按抽样记录推断每列模态（text/image/audio/video）。"""
+        from app.services.media_assets import infer_field_modalities
+        sample_rows = sample_rows or settings.MEDIA_SAMPLE_ROWS
+        return infer_field_modalities(self.preview(ds_id, sample_rows))
+
     def get_columns(self, ds_id: str) -> List[str]:
         """获取数据集的列名，支持json、jsonl和parquet格式
         

@@ -13,9 +13,9 @@
             <fv-details-list :theme="theme" v-show="tableInfo.length" :model-value="tableInfo" :head="heads" ref="table"
                 style="width: 100%; height: 100%">
                 <template v-for="(col, i) in heads" :key="i + 1" v-slot:[`column_${i}`]="x">
-                    <p :title="i == 0 ? x.row_index + 1 : x.item[col.key] ? x.item[col.key] : ''">
-                        {{ i == 0 ? x.row_index + 1 : x.item[col.key] ? x.item[col.key] : '' }}
-                    </p>
+                    <p v-if="i == 0">{{ x.item.__row + 1 }}</p>
+                    <media-cell v-else :value="x.item[col.key]" :field="col.key" :row="x.item.__row"
+                        :modality="modalities[col.key]" :source="mediaSource"></media-cell>
                 </template>
             </fv-details-list>
         </div>
@@ -29,8 +29,13 @@
 import { mapState } from 'pinia'
 import { useAppConfig } from '@/stores/appConfig'
 import { useTheme } from '@/stores/theme'
+import axios from '@/axios/config.js'
+import mediaCell from '../../common/mediaCell.vue'
 
 export default {
+    components: {
+        mediaCell
+    },
     props: {
         item: {
             type: Object,
@@ -42,7 +47,8 @@ export default {
             num_per_page: 10,
             currentPage: 1,
             heads: [],
-            tableInfo: []
+            tableInfo: [],
+            modalities: {}
         }
     },
     watch: {
@@ -55,10 +61,14 @@ export default {
         ...mapState(useTheme, ['theme']),
         pages() {
             return Math.ceil(this.item.num_samples / this.num_per_page)
+        },
+        mediaSource() {
+            return { type: 'dataset', datasetId: this.item.id }
         }
     },
     mounted() {
         this.getTableData()
+        this.getModalities()
     },
     methods: {
         getTableData(refreshHead = true) {
@@ -71,9 +81,21 @@ export default {
                 )
                 .then((res) => {
                     if (res.code === 200) {
-                        this.tableInfo = JSON.parse(res.data)
+                        const offset = (this.currentPage - 1) * this.num_per_page
+                        this.tableInfo = JSON.parse(res.data).map((record, idx) => ({ ...record, __row: offset + idx }))
                         if (refreshHead) this.getHeads()
                     }
+                })
+        },
+        getModalities() {
+            if (!this.item.id) return
+            axios
+                .get(`/api/v1/datasets/${encodeURIComponent(this.item.id)}/field_modalities`)
+                .then((res) => {
+                    if (res.data && res.data.code === 200) this.modalities = res.data.data || {}
+                })
+                .catch(() => {
+                    this.modalities = {}
                 })
         },
         getHeads() {
@@ -86,6 +108,7 @@ export default {
                 width: 60
             })
             for (let key in this.tableInfo[0]) {
+                if (key === '__row') continue
                 heads.push({
                     key,
                     content: key,

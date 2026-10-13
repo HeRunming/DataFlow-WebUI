@@ -11,8 +11,13 @@ from .endpoints import preferences
 from .endpoints import agent
 from .endpoints import json_schemas
 
+from .endpoints import media
+
 api_router = APIRouter()
 # api_router.include_router(health.router, prefix="/health")
+# media routes live under /datasets/{id}/... and /tasks/execution/{id}/...;
+# registered first so they are matched before the generic /datasets/{ds_id}.
+api_router.include_router(media.router)
 api_router.include_router(datasets.router, prefix="/datasets")
 api_router.include_router(operators.router, prefix="/operators")
 api_router.include_router(tasks.router, prefix="/tasks")

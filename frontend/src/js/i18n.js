@@ -1274,5 +1274,29 @@ export default {
     "Change the language of the DataFlow WebUI.": {
         "en": "Change the language of the DataFlow WebUI.",
         "cn": "更改 DataFlow WebUI 的语言。"
+    },
+    "Media failed to load": {
+        "en": "Media failed to load",
+        "cn": "媒体加载失败"
+    },
+    "Media file path": {
+        "en": "Media file path",
+        "cn": "媒体文件路径"
+    },
+    "Pick a field": {
+        "en": "Pick a field",
+        "cn": "选择字段"
+    },
+    "image": {
+        "en": "image",
+        "cn": "图像"
+    },
+    "audio": {
+        "en": "audio",
+        "cn": "音频"
+    },
+    "video": {
+        "en": "video",
+        "cn": "视频"
     }
 }

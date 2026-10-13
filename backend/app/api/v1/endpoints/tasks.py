@@ -11,6 +11,7 @@ from app.api.v1.resp import ok
 from app.api.v1.errors import *
 from datetime import datetime
 from app.core.logger_setup import get_logger
+from app.services.task_outputs import resolve_output_file
 import os
 
 # 配置日志
@@ -56,22 +57,23 @@ def get_execution_status(task_id: str):
         raise HTTPException(500, f"Failed to get task status: {str(e)}")
 
 @router.get("/execution/{task_id}/result", response_model=ApiResponse[Dict], operation_id="get_task_result", summary="查询任务执行结果")
-def get_task_result(task_id: str, step: int = None, limit: int = 5):
+def get_task_result(task_id: str, step: int = None, limit: int = 5, node: str = None):
     """
     查询任务执行结果
-    
+
     Args:
         task_id: 任务 ID
         step: 步骤索引（可选，None 表示返回最后一个步骤的输出）
         limit: 返回的数据条数（默认5条）
-    
+        node: DAG 节点 ID（可选，优先于 step）
+
     Returns:
         执行结果字典
     """
     try:
-        logger.info(f"Request: GET /execution/{task_id}/result, step={step}, limit={limit}")
-        
-        result = container.task_registry.get_execution_result(task_id, step, limit)
+        logger.info(f"Request: GET /execution/{task_id}/result, step={step}, node={node}, limit={limit}")
+
+        result = container.task_registry.get_execution_result(task_id, step, limit, node=node)
         if not result:
             raise HTTPException(404, f"Task with id {task_id} not found")
         
@@ -116,7 +118,7 @@ def get_execution_log(task_id: str, operator_name: str = Query(None, description
 
 
 @router.get("/execution/{task_id}/download", operation_id="download_task_result", summary="下载任务执行结果文件,step从0开始计数，想请求第一个算子传step=0")
-def download_task_result(task_id: str, step: int = None):
+def download_task_result(task_id: str, step: int = None, node: str = None):
     """
     下载任务执行结果文件
     
@@ -140,40 +142,21 @@ def download_task_result(task_id: str, step: int = None):
         # 获取执行结果
         output = execution_data.get("output", {})
         execution_results = output.get("execution_results", [])
-        
-        # 确定要下载的步骤索引
-        if step is None:
-            # 默认下载最后一个已完成的步骤
-            if execution_results:
-                step = execution_results[-1].get("index", 0)
-            else:
+
+        if step is None and node is None:
+            if not execution_results:
                 raise HTTPException(400, "No completed operators found")
-        
-        # 检查步骤是否有效
-        if step < 0 or step >= len(execution_results):
-            raise HTTPException(400, f"Invalid step index: {step}. Valid range: 0-{len(execution_results)-1}")
-        
-        # 获取算子信息
-        operator_info = execution_results[step]
-        operator_name = operator_info.get("operator", f"step_{step}")
-        
-        # 构建缓存文件路径（使用绝对路径）
+        elif node is None and (step < 0 or step >= len(output.get("operators_detail") or {}) ):
+            raise HTTPException(400, f"Invalid step index: {step}")
+
         from app.core.config import settings
-        cache_path = settings.CACHE_DIR
-        cache_task_dir = f"{task_id}_output"
-        cache_file_prefix = "dataflow_cache_step"
-        actual_step_for_json = step + 1
+        cache_file, step, op_info = resolve_output_file(settings.CACHE_DIR, task_id, output, step=step, node=node)
+        if not cache_file:
+            raise HTTPException(404, f"Result file not found for step={step} node={node}")
 
-        cache_file_name = f"{cache_file_prefix}_step{actual_step_for_json}.jsonl"
-
-        cache_file = os.path.join(cache_path, cache_task_dir, cache_file_name)
-        
-        # 检查文件是否存在
-        if not os.path.exists(cache_file):
-            raise HTTPException(404, f"Result file not found for step {step}: {cache_file}")
-        
-        # 返回文件下载
-        filename = f"{task_id}_{operator_name}_step{actual_step_for_json}.jsonl"
+        operator_name = (op_info or {}).get("name", f"step_{step}")
+        label = (op_info or {}).get("node_id") or f"step{(step or 0) + 1}"
+        filename = f"{task_id}_{operator_name}_{label}.jsonl"
         logger.info(f"Downloading file: {cache_file} as {filename}")
         
         return FileResponse(

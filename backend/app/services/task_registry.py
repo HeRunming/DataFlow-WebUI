@@ -7,6 +7,7 @@ from typing import Dict, List, Optional, Any, Tuple
 from app.core.container import container
 from app.core.config import settings
 from app.services.dataflow_engine import DataFlowEngine
+from app.services.task_outputs import resolve_output_file, find_operator
 from app.core.logger_setup import get_logger
 
 logger = get_logger(__name__)
@@ -319,7 +320,8 @@ class TaskRegistry:
         self, 
         task_id: str,
         step: Optional[int] = None,
-        limit: int = 5
+        limit: int = 5,
+        node: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         获取执行结果
@@ -347,39 +349,19 @@ class TaskRegistry:
         operators_detail = output.get("operators_detail", {})
         operator_logs = output.get("operator_logs", {})
         
-        # 确定要查询的步骤索引
-        if step is None:
-            # 默认返回最后一个已完成的步骤
-            if execution_results:
-                step = execution_results[-1].get("index", 0)
-            else:
-                # 尝试查找正在运行的步骤
-                # Find operator with status 'running' in operators_detail
-                running_op = None
-                for op_key, op_info in operators_detail.items():
-                    if op_info.get("status") == "running":
-                        running_op = op_info
-                        break
-                
-                if running_op:
-                    step = running_op.get("index", 0)
-                else:
-                    step = 0
-        
-        # 读取缓存文件（使用绝对路径）
-        cache_path = settings.CACHE_DIR
-        cache_file_prefix = "dataflow_cache_step"
-        cache_file = os.path.join(cache_path, f"{cache_file_prefix}_step{step}.jsonl")
-        
+        # 解析算子输出文件：优先 operators_detail 记录的 output_file（DAG 布局），
+        # 否则回退到 {task_id}_output/dataflow_cache_step_step{index+1}.jsonl（线性布局）。
+        # 算子尚未写出时回退到其输入。
+        cache_file, step, _ = resolve_output_file(
+            settings.CACHE_DIR, task_id, output,
+            step=step, node=node, fallback_to_input=True,
+        )
+
         sample_data = []
         total_count = 0
         file_exists = False
-        
-        # 如果当前 step 的文件不存在，尝试读取上一步的文件
-        if not os.path.exists(cache_file) and step > 0:
-            cache_file = os.path.join(cache_path, f"{cache_file_prefix}_step{step-1}.jsonl")
-        
-        if os.path.exists(cache_file):
+
+        if cache_file:
             file_exists = True
             try:
                 with open(cache_file, "r", encoding="utf-8") as f:
@@ -396,14 +378,13 @@ class TaskRegistry:
         # 获取算子信息
         operator_name = None
         operator_status = None
-        
-        # 从 operators_detail 中查找
-        # Need to find entry with index == step
-        for op_key, op_val in operators_detail.items():
-            if op_val.get("index") == step:
-                operator_name = op_val.get("name")
-                operator_status = op_val.get("status")
-                break
+        node_id = None
+
+        _, op_val = find_operator(operators_detail, step=step, node=node)
+        if op_val:
+            operator_name = op_val.get("name")
+            operator_status = op_val.get("status")
+            node_id = op_val.get("node_id")
 
         return {
             "task_id": task_id,
@@ -411,6 +392,7 @@ class TaskRegistry:
             "pipeline_config": execution_data.get("pipeline_config"),
             "status": execution_data.get("status"),
             "step": step,
+            "node_id": node_id,
             "operator_name": operator_name,
             "operator_status": operator_status,
             "sample_data": sample_data,

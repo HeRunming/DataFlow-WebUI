@@ -11,7 +11,7 @@
                     </div>
                     <span class="title-block">{{ local('Execution Sampled Data') }}</span>
                     <table-info :theme="theme" v-if="runningResult && runningResult.sample_data"
-                        :table-info="runningResult.sample_data"></table-info>
+                        :table-info="runningResult.sample_data" :media-source="mediaSource"></table-info>
                     <span class="title-block">{{ local('Current Step Logs') }}</span>
                     <div v-if="operatorLogs.length > 0" class="log-container step">
                         <p v-for="(item, index) in operatorLogs" :key="index" class="log-item">
@@ -98,6 +98,15 @@ export default {
                 return this.runningResult.output.execution_results
             } catch (error) {
                 return []
+            }
+        },
+        mediaSource() {
+            if (!this.runningResult || !this.runningResult.task_id) return null
+            return {
+                type: 'task',
+                taskId: this.runningResult.task_id,
+                step: this.runningResult.step,
+                node: this.runningResult.node_id
             }
         },
         operatorLogs() {
