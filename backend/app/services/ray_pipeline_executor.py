@@ -580,11 +580,48 @@ def dataflow_pipeline_execute(pipeline_config: Dict[str, Any], dataflow_runtime:
 
         add_log("run", f"[{datetime.now().isoformat()}] Step 3: Executing {len(run_op)} operators...")
         logger.info(f"Executing {len(run_op)} operators...")
-        
+
+        from app.services.execution_graph import build_graph
+        from app.services.node_io import node_input_file, build_node_storage, node_output_file
+
+        _graph = build_graph(pipeline_config)
+        _dataset_root = os.path.abspath(dataflow_runtime['storage']['first_entry_file_name'])
+        _dataset_base_dir = os.path.dirname(_dataset_root)
+        try:
+            from app.services import media_assets as _ma
+            import json as _json
+            _sample_recs = []
+            with open(_dataset_root, encoding='utf-8') as _f:
+                for _line in _f:
+                    if len(_sample_recs) >= 10: break
+                    if _line.strip():
+                        _sample_recs.append(_json.loads(_line))
+            _media_fields = [col for col, mod in _ma.infer_field_modalities(_sample_recs).items() if mod in _ma.MEDIA_MODALITIES]
+        except Exception:
+            _media_fields = []
+
+        _done_outputs: Dict[str, str] = {}
         execution_results = []
         for op_idx, (operator, run_params, op_name, op_key) in enumerate(run_op):
             try:
-                run_params["storage"] = storage.step()
+                _node = _graph.by_index(op_idx) if _graph.valid else None
+                _node_id = _node.id if _node else f"op_{op_idx}"
+
+                _input_file, _merge_logs = node_input_file(
+                    _graph if _graph.valid else _graph,
+                    _node if _node else type('N', (), {'preds': [], 'id': _node_id, 'merge_key': None})(),
+                    _dataset_root,
+                    _done_outputs,
+                    settings.CACHE_DIR,
+                    task_id,
+                    _media_fields,
+                    _dataset_base_dir,
+                )
+                for _ml in _merge_logs:
+                    add_log("run", _ml, op_key)
+                    logger.info(_ml)
+                _node_storage = build_node_storage(_input_file, settings.CACHE_DIR, task_id, _node_id)
+                run_params["storage"] = _node_storage.step()
                 add_log("run", f"[{datetime.now().isoformat()}] [{op_idx+1}/{len(run_op)}] Running operator: {op_name}", op_key)
                 logger.info(f"[{op_idx+1}/{len(run_op)}] Running {op_name}")
                 logger.debug(f"Run params: {list(run_params.keys())}")
@@ -664,6 +701,16 @@ def dataflow_pipeline_execute(pipeline_config: Dict[str, Any], dataflow_runtime:
                              add_log("run", f"WARN: Failed to read output file: {e}", op_key)
                 
                 operators_detail[op_key]["sample_count"] = sample_count
+                operators_detail[op_key]["node_id"] = _node_id
+                try:
+                    operators_detail[op_key]["output_file"] = node_output_file(settings.CACHE_DIR, task_id, _node_id)
+                    _done_outputs[_node_id] = operators_detail[op_key]["output_file"]
+                    _input_count = sum(1 for _ in open(_input_file, encoding='utf-8')) if os.path.exists(_input_file) else 0
+                    operators_detail[op_key]["input_count"] = _input_count
+                    if _input_count:
+                        operators_detail[op_key]["conversion_rate"] = round(sample_count / _input_count, 4)
+                except Exception as _e:
+                    logger.warning(f"Failed to record node output metadata: {_e}")
                 add_log("run", f"Processed {sample_count} samples", op_key)
                 
                 add_log("run", f"[{datetime.now().isoformat()}] [{op_idx+1}/{len(run_op)}] {op_name} completed successfully", op_key)
