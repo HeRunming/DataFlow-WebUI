@@ -533,16 +533,28 @@ export default {
                 return
             }
             let nodeOperators = []
+            let configEdges = []
             results.forEach((node) => {
                 if (node.id === 'db-node') return
                 let oriNode = flow.findNode(node.id)
                 nodeOperators.push({
                     name: oriNode.data.name,
                     params: oriNode.data.operatorParams,
-                    location: [oriNode.position.x, oriNode.position.y]
+                    location: [oriNode.position.x, oriNode.position.y],
+                    id: node.id  // persist stable canvas id for DAG edges
                 })
             })
-            return nodeOperators
+            // Collect structural (edgeType === 'node') edges between operator nodes.
+            edges.forEach((edge) => {
+                if (edge.data && edge.data.edgeType === 'node' && edge.source !== 'db-node' && edge.target !== 'db-node') {
+                    configEdges.push({ source: edge.source, target: edge.target })
+                }
+            })
+            // Only include edges when there is a genuine branch (not just a linear chain).
+            const isLinearChain = configEdges.every((e, i) =>
+                i === 0 || configEdges[i - 1].target === e.source
+            )
+            return { operators: nodeOperators, edges: isLinearChain ? null : configEdges }
         },
         async handleSaveClick() {
             if (!this.currentPipeline || !this.currentPipeline.id) {
@@ -586,20 +598,22 @@ export default {
                 })
             }
             if (cancel) return false
-            let nodeOperators = this.sortPipeline()
+            const sorted = this.sortPipeline()
             const flow = useVueFlow(this.flowId)
             let dbNode = flow.findNode('db-node')
+            const configPayload = {
+                file_path: this.currentPipeline.config.file_path,
+                input_dataset: {
+                    id: this.sourceDatabase.id,
+                    location: [dbNode.position.x, dbNode.position.y]
+                },
+                operators: sorted.operators
+            }
+            if (sorted.edges !== null) configPayload.edges = sorted.edges
             await this.$api.pipelines
                 .update_pipeline(this.currentPipeline.id, {
                     name: this.currentPipeline.name,
-                    config: {
-                        file_path: this.currentPipeline.config.file_path,
-                        input_dataset: {
-                            id: this.sourceDatabase.id,
-                            location: [dbNode.position.x, dbNode.position.y]
-                        },
-                        operators: nodeOperators
-                    }
+                    config: configPayload
                 })
                 .then((res) => {
                     if (res.code === 200) {
@@ -623,7 +637,9 @@ export default {
                 })
                 return
             }
-            let nodeOperators = this.sortPipeline()
+            const _sorted = this.sortPipeline()
+            const nodeOperators = _sorted ? _sorted.operators : []
+            const _edges = _sorted ? _sorted.edges : null
             const flow = useVueFlow(this.flowId)
             let dbNode = flow.findNode('db-node')
             if (!dbNode) {
@@ -641,7 +657,8 @@ export default {
                             id: this.sourceDatabase.id,
                             location: [dbNode.position.x, dbNode.position.y]
                         },
-                        operators: nodeOperators
+                        operators: nodeOperators,
+                        ...((_edges !== null) ? { edges: _edges } : {})
                     }
                 })
                 .then((res) => {

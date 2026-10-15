@@ -39,6 +39,17 @@ class PipelineOperator(BaseModel): # 画布上的pipeline类
     name: str = Field(..., description="算子名称")
     params: Any = Field(default_factory=dict, description="算子参数配置")
     location: tuple[float, float] = Field(default=(0, 0), description="算子在画布上的位置, 包含x和y两个坐标值")
+    id: Optional[str] = Field(None, description="DAG 节点 ID（可选，默认 op_{index}），edges 用它引用算子")
+    merge_key: Optional[str] = Field(
+        None,
+        description="多上游合并时的 join 字段（可选）。缺省时各分支都有 id 列则按 id 合并，否则按行序对齐",
+    )
+
+
+class PipelineEdge(BaseModel):
+    """算子间的数据流边：target 消费 source 的输出"""
+    source: str = Field(..., description="上游算子节点 ID")
+    target: str = Field(..., description="下游算子节点 ID")
     # @field_validator('name')
     # def validate_operator_name(cls, v: str) -> str:
     #     """验证算子名称格式"""
@@ -56,8 +67,15 @@ class PipelineConfig(BaseModel):
     """Pipeline配置模型"""
     file_path: str = Field(..., description="Pipeline文件路径")
     input_dataset: Union[str, PipelineInputDataset] = Field(..., description="输入数据集ID或配置")
-    # 用 list 的顺序代表算子执行顺序
+    # 不提供 edges 时，用 list 的顺序代表算子执行顺序（串行链）
     operators: List[PipelineOperator] = Field(default_factory=list, description="算子执行序列")
+    edges: Optional[List[PipelineEdge]] = Field(
+        None,
+        description=(
+            "可选的算子间数据流边（串并联 DAG）。缺省时按 operators 顺序串行；"
+            "提供时无上游的算子读输入数据集，多上游的算子读各上游输出的合并结果"
+        ),
+    )
     
     # @field_validator('operators')
     # def validate_operators(cls, v: List[PipelineOperator]) -> List[PipelineOperator]:
@@ -125,6 +143,7 @@ class PipelineValidationIssue(BaseModel):
     message: str = Field(..., description="可直接展示给用户的诊断信息")
     operator_index: Optional[int] = Field(None, description="0-based 算子索引")
     operator_name: Optional[str] = Field(None, description="算子名称")
+    node_id: Optional[str] = Field(None, description="DAG 节点 ID")
     param_name: Optional[str] = Field(None, description="相关参数名")
     field_name: Optional[str] = Field(None, description="相关字段名")
     available_fields: List[str] = Field(default_factory=list, description="当时可用字段")
@@ -139,4 +158,6 @@ class PipelineValidationResult(BaseModel):
     warnings: List[PipelineValidationIssue] = Field(default_factory=list, description="非阻断性问题")
     dataset_id: Optional[str] = Field(None, description="解析出的输入数据集 ID")
     available_input_fields: List[str] = Field(default_factory=list, description="输入数据集列名")
-    final_available_fields: List[str] = Field(default_factory=list, description="顺序执行后可见字段")
+    final_available_fields: List[str] = Field(default_factory=list, description="执行后（所有末端节点）可见字段")
+    field_modalities: Dict[str, str] = Field(default_factory=dict, description="输入数据集字段的模态推断（text/image/audio/video）")
+    execution_order: List[str] = Field(default_factory=list, description="算子节点的执行顺序（拓扑序）")

@@ -9,6 +9,8 @@ from typing import List, Optional, Dict, Any, Tuple, Union
 from app.core.logger_setup import get_logger
 from app.core.config import settings
 from app.schemas.pipelines import PipelineValidationIssue, PipelineValidationResult
+from app.services import media_assets
+from app.services.execution_graph import build_graph, merge_fields
 # from app.services.operator_registry import _op_registry
 from app.core.container import container
 logger = get_logger(__name__)
@@ -582,6 +584,7 @@ class PipelineRegistry:
         available_fields: list[str] | None = None,
         suggested_fields: list[str] | None = None,
         repair_hint: str | None = None,
+        node_id: str | None = None,
     ) -> PipelineValidationIssue:
         return PipelineValidationIssue(
             level=level,
@@ -594,7 +597,94 @@ class PipelineRegistry:
             available_fields=available_fields or [],
             suggested_fields=suggested_fields or [],
             repair_hint=repair_hint,
+            node_id=node_id,
         )
+
+    def _build_media_validation_context(self, dataset_id: Optional[str], available_fields: List[str]) -> Dict[str, Any]:
+        """Sample input records once for media checks: column modalities + base dir."""
+        if not dataset_id or not available_fields or not container.dataset_registry:
+            return {}
+        try:
+            dataset = container.dataset_registry.get(dataset_id)
+            if not dataset or not hasattr(container.dataset_registry, "preview"):
+                return {}
+            records = container.dataset_registry.preview(dataset_id, settings.MEDIA_SAMPLE_ROWS) or []
+        except Exception as exc:
+            logger.warning(f"Failed to sample dataset {dataset_id} for media validation: {exc}")
+            return {}
+        return {
+            "records": records,
+            "modalities": media_assets.infer_field_modalities(records),
+            "base_dir": os.path.dirname(os.path.abspath(dataset["root"])),
+        }
+
+    def _check_media_field(
+        self,
+        idx: int,
+        op_name: str,
+        param_name: str,
+        field_name: str,
+        current_fields: List[str],
+        media_ctx: Dict[str, Any],
+        errors: List[PipelineValidationIssue],
+        warnings: List[PipelineValidationIssue],
+    ) -> None:
+        """Media checks for an operator param that reads a dataset column.
+
+        - a media-named param (input_image_key, ...) bound to a text column → warning
+          with the matching media columns as suggestions
+        - a media column whose sampled local files are missing → error
+        """
+        modalities = media_ctx.get("modalities", {})
+        # Only dataset columns are sampled; fields produced upstream are unknown here.
+        if not media_ctx.get("records") or field_name not in modalities:
+            return
+        expected = media_assets.infer_param_modality(param_name)
+        actual = modalities.get(field_name, media_assets.TEXT)
+
+        if expected in media_assets.MEDIA_MODALITIES and actual != expected:
+            candidates = [name for name, kind in modalities.items() if kind == expected]
+            warnings.append(self._make_validation_issue(
+                level="warning",
+                code="media_modality_mismatch",
+                message=(
+                    f"算子 '{op_name}' 的参数 '{param_name}' 期望 {expected} 字段，"
+                    f"但 '{field_name}' 抽样推断为 {actual}。"
+                ),
+                operator_index=idx,
+                operator_name=op_name,
+                param_name=param_name,
+                field_name=field_name,
+                available_fields=current_fields,
+                suggested_fields=candidates,
+                repair_hint=(
+                    f"改用 {expected} 字段之一：{', '.join(candidates)}。" if candidates else
+                    f"数据集中没有推断为 {expected} 的字段；媒体字段应保存图片/音频/视频文件路径或 URL。"
+                ),
+            ))
+
+        if actual in media_assets.MEDIA_MODALITIES:
+            missing = media_assets.validate_media_references(
+                media_ctx["records"], field_name, base_dir=media_ctx.get("base_dir"),
+            )
+            if missing:
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="media_file_not_found",
+                    message=(
+                        f"算子 '{op_name}' 读取的 {actual} 字段 '{field_name}' 引用了不存在的文件"
+                        f"（抽样 {len(media_ctx['records'])} 行）：{missing}"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name=param_name,
+                    field_name=field_name,
+                    available_fields=current_fields,
+                    repair_hint=(
+                        "媒体字段中的相对路径按数据集文件所在目录解析。请修正路径，"
+                        "或把媒体文件放到对应位置后重试。"
+                    ),
+                ))
 
     def _split_operator_params(
         self,
@@ -847,248 +937,49 @@ class PipelineRegistry:
 
         current_fields = list(available_fields)
         operators = config.get("operators", []) or []
+        media_ctx = self._build_media_validation_context(dataset_id, available_fields)
 
-        for idx, op in enumerate(operators):
-            op_name = op.get("name") or f"operator_{idx}"
-            init_params, run_params, op_details = self._split_operator_params(op_name, op.get("params"))
+        graph = build_graph(config)
+        for graph_issue in graph.issues:
+            target = errors if graph_issue.level == "error" else warnings
+            target.append(self._make_validation_issue(
+                level=graph_issue.level,
+                code=graph_issue.code,
+                message=graph_issue.message,
+                operator_index=graph_issue.operator_index,
+                operator_name=graph_issue.operator_name,
+                node_id=graph_issue.node_id,
+            ))
 
-            if not op_details:
-                errors.append(self._make_validation_issue(
-                    level="error",
-                    code="unknown_operator",
-                    message=f"算子 '{op_name}' 未在 operator registry 中注册。",
-                    operator_index=idx,
-                    operator_name=op_name,
-                    available_fields=current_fields,
-                ))
-                continue
-
-            if "prompt_template" in init_params and isinstance(init_params.get("prompt_template"), dict):
-                prompt_template = init_params.get("prompt_template") or {}
-                if not prompt_template.get("cls_name"):
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="invalid_prompt_template_dict",
-                        message=(
-                            f"算子 '{op_name}' 的 prompt_template 使用了 dict，但缺少 cls_name。"
-                            " 仅允许结构化 prompt 对象（含 cls_name）或 prompt 类名字符串。"
-                        ),
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name="prompt_template",
-                        available_fields=current_fields,
-                    ))
-
-            init_defs = (op_details.get("parameter") or {}).get("init", [])
-            init_def_names = {item.get("name") for item in init_defs if item.get("name")}
-
-            for dynamic_param_name in ("process_fn", "filter_rules"):
-                if dynamic_param_name not in init_def_names:
-                    continue
-                dynamic_value = init_params.get(dynamic_param_name)
-                if dynamic_value is None:
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="missing_dynamic_code_param",
-                        message=f"算子 '{op_name}' 缺少必需参数 '{dynamic_param_name}'。",
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name=dynamic_param_name,
-                        available_fields=current_fields,
-                    ))
-                    continue
-                _, dynamic_error = self._normalize_dynamic_code_param(
-                    dynamic_value,
-                    param_name=dynamic_param_name,
+        if graph.order:
+            # Graph-driven field flow: a node sees the dataset columns (root), its single
+            # upstream's fields, or the union of its upstreams' fields (merge). For a
+            # legacy edge-less config the graph is the list-order chain, so this is the
+            # same accumulation as before.
+            fields_after: Dict[str, List[str]] = {}
+            for node_id in graph.order:
+                node = graph.nodes[node_id]
+                if not node.preds:
+                    node_fields = list(available_fields)
+                elif len(node.preds) == 1:
+                    node_fields = list(fields_after[node.preds[0]])
+                else:
+                    node_fields = merge_fields([fields_after[pred] for pred in node.preds])
+                self._validate_operator_step(
+                    node.index, operators[node.index], node_fields, errors, warnings,
+                    node_id=node_id, media_ctx=media_ctx,
                 )
-                if dynamic_error:
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="invalid_dynamic_code_param",
-                        message=f"算子 '{op_name}' 的参数 '{dynamic_param_name}' 非法：{dynamic_error}",
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name=dynamic_param_name,
-                        available_fields=current_fields,
-                    ))
-
-            if "llm_serving" in init_def_names:
-                raw_serving = init_params.get("llm_serving")
-                serving_id = self._extract_serving_id(raw_serving)
-                if raw_serving is None:
-                    warnings.append(self._make_validation_issue(
-                        level="warning",
-                        code="missing_llm_serving",
-                        message=(
-                            f"算子 '{op_name}' 依赖 llm_serving，但当前配置未显式指定。"
-                            " 运行时可能依赖默认 serving 自动填充，稳定性和可解释性都会变差。"
-                        ),
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name="llm_serving",
-                        available_fields=current_fields,
-                    ))
-                elif not serving_id:
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="invalid_serving_reference",
-                        message=(
-                            f"算子 '{op_name}' 的 llm_serving 不是可解析的 serving id。"
-                            " 请输入真实的 serving id，或传入带 `id` / `serving_id` 的对象。"
-                        ),
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name="llm_serving",
-                        available_fields=current_fields,
-                    ))
-                elif not container.serving_registry or not container.serving_registry._get(serving_id):
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="serving_not_found",
-                        message=f"算子 '{op_name}' 引用了不存在的 llm_serving '{serving_id}'。",
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name="llm_serving",
-                        field_name=serving_id,
-                        available_fields=current_fields,
-                    ))
-
-            if "embedding_serving" in init_def_names:
-                raw_embedding_serving = init_params.get("embedding_serving")
-                embedding_serving_id = self._extract_serving_id(raw_embedding_serving)
-                if raw_embedding_serving is not None and not embedding_serving_id:
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="invalid_serving_reference",
-                        message=(
-                            f"算子 '{op_name}' 的 embedding_serving 不是可解析的 serving id。"
-                            " 请输入真实的 serving id，或传入带 `id` / `serving_id` 的对象。"
-                        ),
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name="embedding_serving",
-                        available_fields=current_fields,
-                    ))
-                elif embedding_serving_id and (not container.serving_registry or not container.serving_registry._get(embedding_serving_id)):
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="serving_not_found",
-                        message=f"算子 '{op_name}' 引用了不存在的 embedding_serving '{embedding_serving_id}'。",
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name="embedding_serving",
-                        field_name=embedding_serving_id,
-                        available_fields=current_fields,
-                    ))
-
-            if "prompt_template" in init_def_names and init_params.get("prompt_template") is not None:
-                prompt_template_value = init_params.get("prompt_template")
-                allowed_prompts = set(op_details.get("allowed_prompts") or [])
-                if isinstance(prompt_template_value, str):
-                    if allowed_prompts and prompt_template_value not in allowed_prompts:
-                        errors.append(self._make_validation_issue(
-                            level="error",
-                            code="invalid_prompt_template_class",
-                            message=(
-                                f"算子 '{op_name}' 的 prompt_template='{prompt_template_value}' 不在允许列表中："
-                                f"{sorted(allowed_prompts)}。"
-                            ),
-                            operator_index=idx,
-                            operator_name=op_name,
-                            param_name="prompt_template",
-                            available_fields=current_fields,
-                        ))
-                elif isinstance(prompt_template_value, dict):
-                    cls_name = prompt_template_value.get("cls_name")
-                    if cls_name and allowed_prompts and cls_name not in allowed_prompts:
-                        errors.append(self._make_validation_issue(
-                            level="error",
-                            code="invalid_prompt_template_class",
-                            message=(
-                                f"算子 '{op_name}' 的 prompt_template.cls_name='{cls_name}' 不在允许列表中："
-                                f"{sorted(allowed_prompts)}。"
-                            ),
-                            operator_index=idx,
-                            operator_name=op_name,
-                            param_name="prompt_template",
-                            available_fields=current_fields,
-                        ))
-
-            run_defs = (op_details.get("parameter") or {}).get("run", [])
-            # 提前拦截「run 里塞了算子 run() 签名之外的参数」这类错误。执行时
-            # operator.run(**run_params) 会因未知关键字参数直接崩溃，且真实异常
-            # 常被吞掉，所以在 validate 阶段就报 error，让 agent 能立即纠正。
-            # 常见误用：把 serving_name / system_prompt / user_prompt（其实属于
-            # init）塞进了 run。若算子 run() 声明了 **kwargs（VAR_KEYWORD）则放行。
-            run_def_names = {item.get("name") for item in run_defs if item.get("name")}
-            run_accepts_kwargs = any(
-                item.get("kind") == "VAR_KEYWORD" for item in run_defs
-            )
-            if run_def_names and not run_accepts_kwargs:
-                init_def_name_set = {item.get("name") for item in init_defs if item.get("name")}
-                for provided_name in run_params.keys():
-                    if provided_name in ("storage",):
-                        continue
-                    if provided_name not in run_def_names:
-                        belongs_to_init = provided_name in init_def_name_set
-                        hint = (
-                            f" 该参数其实属于该算子的 init 参数，请移到 init。"
-                            if belongs_to_init else
-                            f" 该算子 run() 只接受：{sorted(run_def_names)}。"
-                        )
-                        errors.append(self._make_validation_issue(
-                            level="error",
-                            code="unknown_run_param",
-                            message=(
-                                f"算子 '{op_name}' 的 run 参数 '{provided_name}' 不在 run() 签名中。"
-                                f"{hint}"
-                            ),
-                            operator_index=idx,
-                            operator_name=op_name,
-                            param_name=provided_name,
-                            available_fields=current_fields,
-                        ))
-
-            for param_name, field_name in self._collect_input_field_refs(run_params, run_defs):
-                if current_fields and field_name not in current_fields:
-                    suggested_fields, repair_hint = self._build_missing_input_field_hint(
-                        field_name=field_name,
-                        param_name=param_name,
-                        available_fields=current_fields,
-                    )
-                    errors.append(self._make_validation_issue(
-                        level="error",
-                        code="missing_input_field",
-                        message=(
-                            f"算子 '{op_name}' 的参数 '{param_name}' 引用了字段 '{field_name}'，"
-                            "但它既不在输入数据集中，也不是上游算子已产出的字段。"
-                        ),
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name=param_name,
-                        field_name=field_name,
-                        available_fields=current_fields,
-                        suggested_fields=suggested_fields,
-                        repair_hint=repair_hint,
-                    ))
-
-            for param_name, field_name in self._collect_output_field_refs(run_params):
-                if field_name in current_fields:
-                    warnings.append(self._make_validation_issue(
-                        level="warning",
-                        code="output_field_overwrite",
-                        message=(
-                            f"算子 '{op_name}' 的参数 '{param_name}' 将写回已存在字段 '{field_name}'。"
-                            " 这会覆盖原始列或上游结果，容易让字段流失真。"
-                        ),
-                        operator_index=idx,
-                        operator_name=op_name,
-                        param_name=param_name,
-                        field_name=field_name,
-                        available_fields=current_fields,
-                    ))
-                if field_name not in current_fields:
-                    current_fields.append(field_name)
+                fields_after[node_id] = node_fields
+            if graph.leaves():
+                current_fields = merge_fields([fields_after[leaf] for leaf in graph.leaves()])
+        elif not graph.nodes or graph.explicit_edges is False:
+            for idx, op in enumerate(operators):
+                self._validate_operator_step(idx, op, current_fields, errors, warnings, media_ctx=media_ctx)
+        else:
+            # Invalid graph (cycle / bad edges): still surface per-operator problems,
+            # each checked against the dataset columns only.
+            for idx, op in enumerate(operators):
+                self._validate_operator_step(idx, op, list(available_fields), errors, warnings)
 
         return PipelineValidationResult(
             valid=len(errors) == 0,
@@ -1097,7 +988,286 @@ class PipelineRegistry:
             dataset_id=dataset_id,
             available_input_fields=available_fields,
             final_available_fields=current_fields,
+            field_modalities=media_ctx.get("modalities", {}) if media_ctx else {},
+            execution_order=graph.order,
         )
+
+    def _validate_operator_step(
+        self,
+        idx: int,
+        op: Dict[str, Any],
+        current_fields: List[str],
+        errors: List[PipelineValidationIssue],
+        warnings: List[PipelineValidationIssue],
+        node_id: Optional[str] = None,
+        media_ctx: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        """Validate one operator against the fields visible to it.
+
+        Appends issues and extends ``current_fields`` with the operator's outputs.
+        ``media_ctx`` enables media checks on params bound to input-dataset columns.
+        """
+        n_errors, n_warnings = len(errors), len(warnings)
+        try:
+            self._validate_operator_step_inner(idx, op, current_fields, errors, warnings, media_ctx)
+        finally:
+            if node_id is not None:
+                for issue in errors[n_errors:] + warnings[n_warnings:]:
+                    if issue.node_id is None:
+                        issue.node_id = node_id
+
+    def _validate_operator_step_inner(
+        self,
+        idx: int,
+        op: Dict[str, Any],
+        current_fields: List[str],
+        errors: List[PipelineValidationIssue],
+        warnings: List[PipelineValidationIssue],
+        media_ctx: Optional[Dict[str, Any]],
+    ) -> None:
+        op_name = op.get("name") or f"operator_{idx}"
+        init_params, run_params, op_details = self._split_operator_params(op_name, op.get("params"))
+
+        if not op_details:
+            errors.append(self._make_validation_issue(
+                level="error",
+                code="unknown_operator",
+                message=f"算子 '{op_name}' 未在 operator registry 中注册。",
+                operator_index=idx,
+                operator_name=op_name,
+                available_fields=current_fields,
+            ))
+            return
+
+        if "prompt_template" in init_params and isinstance(init_params.get("prompt_template"), dict):
+            prompt_template = init_params.get("prompt_template") or {}
+            if not prompt_template.get("cls_name"):
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="invalid_prompt_template_dict",
+                    message=(
+                        f"算子 '{op_name}' 的 prompt_template 使用了 dict，但缺少 cls_name。"
+                        " 仅允许结构化 prompt 对象（含 cls_name）或 prompt 类名字符串。"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name="prompt_template",
+                    available_fields=current_fields,
+                ))
+
+        init_defs = (op_details.get("parameter") or {}).get("init", [])
+        init_def_names = {item.get("name") for item in init_defs if item.get("name")}
+
+        for dynamic_param_name in ("process_fn", "filter_rules"):
+            if dynamic_param_name not in init_def_names:
+                continue
+            dynamic_value = init_params.get(dynamic_param_name)
+            if dynamic_value is None:
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="missing_dynamic_code_param",
+                    message=f"算子 '{op_name}' 缺少必需参数 '{dynamic_param_name}'。",
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name=dynamic_param_name,
+                    available_fields=current_fields,
+                ))
+                continue
+            _, dynamic_error = self._normalize_dynamic_code_param(
+                dynamic_value,
+                param_name=dynamic_param_name,
+            )
+            if dynamic_error:
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="invalid_dynamic_code_param",
+                    message=f"算子 '{op_name}' 的参数 '{dynamic_param_name}' 非法：{dynamic_error}",
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name=dynamic_param_name,
+                    available_fields=current_fields,
+                ))
+
+        if "llm_serving" in init_def_names:
+            raw_serving = init_params.get("llm_serving")
+            serving_id = self._extract_serving_id(raw_serving)
+            if raw_serving is None:
+                warnings.append(self._make_validation_issue(
+                    level="warning",
+                    code="missing_llm_serving",
+                    message=(
+                        f"算子 '{op_name}' 依赖 llm_serving，但当前配置未显式指定。"
+                        " 运行时可能依赖默认 serving 自动填充，稳定性和可解释性都会变差。"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name="llm_serving",
+                    available_fields=current_fields,
+                ))
+            elif not serving_id:
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="invalid_serving_reference",
+                    message=(
+                        f"算子 '{op_name}' 的 llm_serving 不是可解析的 serving id。"
+                        " 请输入真实的 serving id，或传入带 `id` / `serving_id` 的对象。"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name="llm_serving",
+                    available_fields=current_fields,
+                ))
+            elif not container.serving_registry or not container.serving_registry._get(serving_id):
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="serving_not_found",
+                    message=f"算子 '{op_name}' 引用了不存在的 llm_serving '{serving_id}'。",
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name="llm_serving",
+                    field_name=serving_id,
+                    available_fields=current_fields,
+                ))
+
+        if "embedding_serving" in init_def_names:
+            raw_embedding_serving = init_params.get("embedding_serving")
+            embedding_serving_id = self._extract_serving_id(raw_embedding_serving)
+            if raw_embedding_serving is not None and not embedding_serving_id:
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="invalid_serving_reference",
+                    message=(
+                        f"算子 '{op_name}' 的 embedding_serving 不是可解析的 serving id。"
+                        " 请输入真实的 serving id，或传入带 `id` / `serving_id` 的对象。"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name="embedding_serving",
+                    available_fields=current_fields,
+                ))
+            elif embedding_serving_id and (not container.serving_registry or not container.serving_registry._get(embedding_serving_id)):
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="serving_not_found",
+                    message=f"算子 '{op_name}' 引用了不存在的 embedding_serving '{embedding_serving_id}'。",
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name="embedding_serving",
+                    field_name=embedding_serving_id,
+                    available_fields=current_fields,
+                ))
+
+        if "prompt_template" in init_def_names and init_params.get("prompt_template") is not None:
+            prompt_template_value = init_params.get("prompt_template")
+            allowed_prompts = set(op_details.get("allowed_prompts") or [])
+            if isinstance(prompt_template_value, str):
+                if allowed_prompts and prompt_template_value not in allowed_prompts:
+                    errors.append(self._make_validation_issue(
+                        level="error",
+                        code="invalid_prompt_template_class",
+                        message=(
+                            f"算子 '{op_name}' 的 prompt_template='{prompt_template_value}' 不在允许列表中："
+                            f"{sorted(allowed_prompts)}。"
+                        ),
+                        operator_index=idx,
+                        operator_name=op_name,
+                        param_name="prompt_template",
+                        available_fields=current_fields,
+                    ))
+            elif isinstance(prompt_template_value, dict):
+                cls_name = prompt_template_value.get("cls_name")
+                if cls_name and allowed_prompts and cls_name not in allowed_prompts:
+                    errors.append(self._make_validation_issue(
+                        level="error",
+                        code="invalid_prompt_template_class",
+                        message=(
+                            f"算子 '{op_name}' 的 prompt_template.cls_name='{cls_name}' 不在允许列表中："
+                            f"{sorted(allowed_prompts)}。"
+                        ),
+                        operator_index=idx,
+                        operator_name=op_name,
+                        param_name="prompt_template",
+                        available_fields=current_fields,
+                    ))
+
+        run_defs = (op_details.get("parameter") or {}).get("run", [])
+        # 提前拦截「run 里塞了算子 run() 签名之外的参数」这类错误。执行时
+        # operator.run(**run_params) 会因未知关键字参数直接崩溃，且真实异常
+        # 常被吞掉，所以在 validate 阶段就报 error，让 agent 能立即纠正。
+        # 常见误用：把 serving_name / system_prompt / user_prompt（其实属于
+        # init）塞进了 run。若算子 run() 声明了 **kwargs（VAR_KEYWORD）则放行。
+        run_def_names = {item.get("name") for item in run_defs if item.get("name")}
+        run_accepts_kwargs = any(
+            item.get("kind") == "VAR_KEYWORD" for item in run_defs
+        )
+        if run_def_names and not run_accepts_kwargs:
+            init_def_name_set = {item.get("name") for item in init_defs if item.get("name")}
+            for provided_name in run_params.keys():
+                if provided_name in ("storage",):
+                    continue
+                if provided_name not in run_def_names:
+                    belongs_to_init = provided_name in init_def_name_set
+                    hint = (
+                        f" 该参数其实属于该算子的 init 参数，请移到 init。"
+                        if belongs_to_init else
+                        f" 该算子 run() 只接受：{sorted(run_def_names)}。"
+                    )
+                    errors.append(self._make_validation_issue(
+                        level="error",
+                        code="unknown_run_param",
+                        message=(
+                            f"算子 '{op_name}' 的 run 参数 '{provided_name}' 不在 run() 签名中。"
+                            f"{hint}"
+                        ),
+                        operator_index=idx,
+                        operator_name=op_name,
+                        param_name=provided_name,
+                        available_fields=current_fields,
+                    ))
+
+        for param_name, field_name in self._collect_input_field_refs(run_params, run_defs):
+            if current_fields and field_name not in current_fields:
+                suggested_fields, repair_hint = self._build_missing_input_field_hint(
+                    field_name=field_name,
+                    param_name=param_name,
+                    available_fields=current_fields,
+                )
+                errors.append(self._make_validation_issue(
+                    level="error",
+                    code="missing_input_field",
+                    message=(
+                        f"算子 '{op_name}' 的参数 '{param_name}' 引用了字段 '{field_name}'，"
+                        "但它既不在输入数据集中，也不是上游算子已产出的字段。"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name=param_name,
+                    field_name=field_name,
+                    available_fields=current_fields,
+                    suggested_fields=suggested_fields,
+                    repair_hint=repair_hint,
+                ))
+            elif media_ctx is not None:
+                self._check_media_field(idx, op_name, param_name, field_name, current_fields, media_ctx, errors, warnings)
+
+        for param_name, field_name in self._collect_output_field_refs(run_params):
+            if field_name in current_fields:
+                warnings.append(self._make_validation_issue(
+                    level="warning",
+                    code="output_field_overwrite",
+                    message=(
+                        f"算子 '{op_name}' 的参数 '{param_name}' 将写回已存在字段 '{field_name}'。"
+                        " 这会覆盖原始列或上游结果，容易让字段流失真。"
+                    ),
+                    operator_index=idx,
+                    operator_name=op_name,
+                    param_name=param_name,
+                    field_name=field_name,
+                    available_fields=current_fields,
+                ))
+            if field_name not in current_fields:
+                current_fields.append(field_name)
+
 
     def get_current_time(self):
         """获取当前时间的ISO格式字符串"""
@@ -1211,6 +1381,14 @@ class PipelineRegistry:
         # Update the locations
         if "location" in new_op_info:
             old_op_info["location"] = new_op_info.get("location")
+
+        # DAG node identity / merge settings (optional, see execution_graph.py)
+        for key in ("id", "merge_key"):
+            if key in new_op_info:
+                if new_op_info.get(key) in (None, ""):
+                    old_op_info.pop(key, None)
+                else:
+                    old_op_info[key] = new_op_info.get(key)
         
         # Parse new params
         new_params = new_op_info.get("params", {})
@@ -1263,12 +1441,19 @@ class PipelineRegistry:
                 updated_pipeline["config"]["input_dataset"] = new_pipeline_config.get("input_dataset", "")
             if "operators" in new_pipeline_config:
                 op_map = {}
+                id_map = {}
                 for idx, op in enumerate(updated_pipeline["config"]["operators"]):
                     op_map[f"{op.get('name')}_{idx}"] = op
-                
+                    if op.get("id"):
+                        id_map[(op.get("name"), op.get("id"))] = op
+
                 updated_operators = []
                 for idx, op in enumerate(new_pipeline_config["operators"]):
-                    old_op_info = op_map.get(f"{op.get('name')}_{idx}", None)
+                    # DAG nodes keep their id across saves even when the topological
+                    # order (and so the list index) changes; fall back to name+index.
+                    old_op_info = id_map.get((op.get("name"), op.get("id"))) if op.get("id") else None
+                    if old_op_info is None:
+                        old_op_info = op_map.get(f"{op.get('name')}_{idx}", None)
                     if old_op_info is None:  # new operator
                         # 创建新 operator 的字典格式
                         op_details = container.operator_registry.get_op_details(op.get("name"))
@@ -1284,6 +1469,12 @@ class PipelineRegistry:
                 
                 # 更新 operators 列表
                 updated_pipeline["config"]["operators"] = updated_operators
+            if "edges" in new_pipeline_config:
+                edges = new_pipeline_config.get("edges")
+                if edges is None:
+                    updated_pipeline["config"].pop("edges", None)
+                else:
+                    updated_pipeline["config"]["edges"] = edges
 
             validation = self.validate_pipeline_config(updated_pipeline["config"])
             if not validation.valid:

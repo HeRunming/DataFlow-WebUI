@@ -123,6 +123,8 @@ export function usePipelineOperation() {
                         operator._cache_parameter.run = item.params.run
                         // 设置操作符在管道中的索引
                         operator.pipeline_idx = idx + 1
+                        // Stable DAG node id (may be undefined for legacy configs).
+                        operator._config_op_id = item.id || null
                         // 添加到格式化操作符列表
                         formatOperators.push(operator)
                     }
@@ -142,8 +144,8 @@ export function usePipelineOperation() {
         const LAYOUT = { startX: 350, gapX: 320, y: 160 }
         formatOperators.forEach((item, idx) => {
             item.location = { x: LAYOUT.startX + idx * LAYOUT.gapX, y: LAYOUT.y }
-            // 生成节点唯一ID
-            item.nodeId = $Guid()
+            // Prefer the stable id stored in the config (DAG); fall back to a fresh Guid.
+            item.nodeId = item._config_op_id || $Guid()
             // 添加节点到流程图
             addPipelineNode(item, flowId)
         })
@@ -155,27 +157,45 @@ export function usePipelineOperation() {
         await $nextTick()
         let existsDatasetNode = flow.findNode('db-node')
 
-        // 为操作符之间添加连接线
-        formatOperators.forEach((item, idx) => {
-            // 如果是第一个操作符且没有数据集节点，则跳过
-            if (idx === 0 && !existsDatasetNode) return
-            // 确定源节点ID
-            let last_id = idx === 0 ? 'db-node' : formatOperators[idx - 1].nodeId
-            // 添加连接线
+        // 为操作符之间添加连接线。
+        // 如果 config 包含 edges（DAG 模式），按 edges 连；否则按列表顺序串联。
+        const configEdges = pipelineConfig.edges
+        const nodeIdMap = {}
+        formatOperators.forEach((item) => { nodeIdMap[item._config_op_id || item.nodeId] = item.nodeId })
+
+        const addFlowEdge = (src, tgt) => {
+            if (!src || !tgt) return
             flow.addEdges({
-                id: $Guid(), // 边唯一标识
-                type: 'base-edge', // 边类型
-                source: last_id, // 源节点ID
-                target: item.nodeId, // 目标节点ID
-                sourceHandle: 'node::source::node', // 源节点手柄
-                targetHandle: 'node::target::node', // 目标节点手柄
-                animated: false, // 禁用动画
-                data: {
-                    label: 'Node', // 边标签
-                    edgeType: 'node' // 边类型标识
+                id: $Guid(),
+                type: 'base-edge',
+                source: src,
+                target: tgt,
+                sourceHandle: 'node::source::node',
+                targetHandle: 'node::target::node',
+                animated: false,
+                data: { label: 'Node', edgeType: 'node' }
+            })
+        }
+
+        if (configEdges && Array.isArray(configEdges)) {
+            // Explicit DAG edges; connect db-node to roots (nodes with no incoming edge).
+            const hasIncoming = new Set(configEdges.map((e) => e.target))
+            formatOperators.forEach((item) => {
+                const configId = item._config_op_id || item.nodeId
+                if (!hasIncoming.has(configId) && existsDatasetNode) {
+                    addFlowEdge('db-node', item.nodeId)
                 }
             })
-        })
+            configEdges.forEach((e) => {
+                addFlowEdge(nodeIdMap[e.source], nodeIdMap[e.target])
+            })
+        } else {
+            // Legacy chain: db-node → op0 → op1 → ...
+            formatOperators.forEach((item, idx) => {
+                if (idx === 0 && !existsDatasetNode) return
+                addFlowEdge(idx === 0 ? 'db-node' : formatOperators[idx - 1].nodeId, item.nodeId)
+            })
+        }
     }
 
     // 返回管道操作方法

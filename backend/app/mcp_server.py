@@ -136,13 +136,21 @@ def _config_to_vue_flow(config: dict) -> tuple[list, list]:
 
     节点布局：从左到右水平排列，间距 250px。
     如果算子配置中包含 location 字段（[x, y]），则使用该位置。
+
+    支持 DAG config（含 edges 字段），也兼容线性 config（无 edges 时按 list 顺序连线）。
     """
+    from app.services.execution_graph import build_graph
+
     operators = config.get("operators", [])
     nodes: list = []
     edges: list = []
 
+    # Build the graph to get stable node IDs and actual edges.
+    graph = build_graph(config)
+
     for i, op in enumerate(operators):
-        node_id = f"op_{i}"
+        # Use the id assigned by the graph (op.get("id") or f"op_{i}").
+        node_id = graph.by_index(i).id if graph.by_index(i) else f"op_{i}"
         location = op.get("location", [250 * i + 100, 200])
         nodes.append({
             "id": node_id,
@@ -153,13 +161,21 @@ def _config_to_vue_flow(config: dict) -> tuple[list, list]:
                 "params": op.get("params", {}),
             },
         })
-        if i > 0:
-            edges.append({
-                "id": f"e_{i-1}_{i}",
-                "source": f"op_{i-1}",
-                "target": node_id,
-                "type": "smoothstep",
-            })
+
+    # Edges: use explicit edges if present, otherwise infer chain.
+    seen = set()
+    for node_id in graph.order:
+        node = graph.nodes[node_id]
+        for pred_id in node.preds:
+            key = (pred_id, node_id)
+            if key not in seen:
+                seen.add(key)
+                edges.append({
+                    "id": f"e_{pred_id}_{node_id}",
+                    "source": pred_id,
+                    "target": node_id,
+                    "type": "smoothstep",
+                })
 
     return nodes, edges
 
