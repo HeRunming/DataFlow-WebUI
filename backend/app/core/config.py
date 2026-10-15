@@ -56,7 +56,8 @@ class Settings(BaseSettings):
     }
     # Please input your custom DataFlow extensions here, the system will try to dynamically load them at runtime
     _DATAFLOW_EXTENSIONS = [
-        # "my_dataflow_extension"
+        "mm_stubs",  # stub multimodal operators (image/audio/video compatibility evidence)
+        # Add more extensions here, e.g.: "my_custom_operators"
     ]
 
 settings = Settings()

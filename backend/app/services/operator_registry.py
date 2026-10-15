@@ -101,6 +101,9 @@ def _gather_single_operator(
         parts = cls.__module__.split(".")
         if len(parts) >= 3 and parts[0] == "dataflow" and parts[1] == "operators":
             category = parts[2]
+        elif len(parts) >= 3 and parts[0] == "mm_stubs":
+            # mm_stubs.<level_1>.<file> → map to the same category names used by DataFlow
+            category = parts[1]  # e.g. "core_vision", "core_speech", "core_text" 
 
     # 2) Description (using staticmethod logic)
     description = _call_get_desc_static(cls, lang=lang) or ""

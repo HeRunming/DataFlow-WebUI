@@ -23,6 +23,24 @@ SERVING_CLS_REGISTRY = dict(zip(SERVING_MODULE_ALL,
                                [getattr(SERVING_MODULE, cls_name) for cls_name in SERVING_MODULE_ALL]))
     
 
+
+def register_serving_class(cls_name: str, cls) -> None:
+    """Register a custom serving class into SERVING_CLS_REGISTRY.
+
+    Call this from a DataFlow extension module (loaded via _DATAFLOW_EXTENSIONS)
+    before the container's ServingRegistry is initialised so that pipeline
+    configs can reference it by cls_name.
+
+    Example (in a multimodal extension)::
+
+        from app.services.serving_registry import register_serving_class
+        from myext.vlm_serving import MultimodalAPIServing
+        register_serving_class("MultimodalAPIServing", MultimodalAPIServing)
+    """
+    if cls_name in SERVING_CLS_REGISTRY:
+        return  # idempotent
+    SERVING_CLS_REGISTRY[cls_name] = cls
+
 class ServingRegistry:
     """Serving管理类，负责管理算子所需的LLM Serving实例的参数。主要用于**API Serving**"""
     def __init__(self, path: str | None = None):

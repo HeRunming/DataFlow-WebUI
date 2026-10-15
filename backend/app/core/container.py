@@ -29,14 +29,8 @@ class AppContainer:
         from app.services.user_prompt_registry import UserPromptRegistry
         
         from .config import settings
-        import importlib
-        # 动态加载DataFlow扩展模块
-        for ext in settings._DATAFLOW_EXTENSIONS:
-            try:
-                importlib.import_module(ext)
-                print(f"Successfully loaded DataFlow extension: {ext}")
-            except ImportError as e:
-                print(f"Failed to load DataFlow extension '{ext}': {e}")
+        from .extension_loader import load_dataflow_extensions
+        load_dataflow_extensions()
         # 检查是否在 Ray worker 中运行
         import ray
         is_ray_worker = ray.is_initialized() and ray.get_runtime_context().worker.mode != 0

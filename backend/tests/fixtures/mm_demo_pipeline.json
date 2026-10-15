@@ -1,0 +1,17 @@
+{
+  "name": "mm_demo_fanout_merge",
+  "comment": "Demo pipeline: dataset(id,image_path,audio_path,prompt) → fan-out to ImageCaptionStub + AudioTranscribeStub → merge → ImageGenStub. Exercises fan-out, merge, and end-to-end media field handling with stub operators.",
+  "config": {
+    "file_path": "",
+    "input_dataset": {"id": "__REPLACE_DS_ID__", "location": [50, 160]},
+    "operators": [
+      {"id": "cap",  "name": "ImageCaptionStub",   "location": [380, 100], "params": {"init": [], "run": [{"name": "input_image_key", "value": "image_path"}, {"name": "output_key", "value": "caption"}]}},
+      {"id": "asr",  "name": "AudioTranscribeStub", "location": [380, 220], "params": {"init": [], "run": [{"name": "input_audio_key", "value": "audio_path"}, {"name": "output_key", "value": "transcript"}]}},
+      {"id": "gen",  "name": "ImageGenStub",        "location": [700, 160], "params": {"init": [], "run": [{"name": "input_key", "value": "caption"}, {"name": "output_key", "value": "generated_image_path"}]}}
+    ],
+    "edges": [
+      {"source": "cap", "target": "gen"},
+      {"source": "asr", "target": "gen"}
+    ]
+  }
+}
