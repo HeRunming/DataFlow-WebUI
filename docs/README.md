@@ -43,6 +43,14 @@ Not sure which? The [root README](../README.md) has a 30-second comparison, or r
 | [install-claude-code_zh.md](install-claude-code_zh.md) | Claude Code CLI 安装指南 |
 | [math_data_synthesis_system.md](math_data_synthesis_system.md) | Math data synthesis case study |
 
+## Multimodal pipelines
+
+| | |
+|---|---|
+| [multimodal/data-format-spec.md](multimodal/data-format-spec.md) | Record schema, path conventions, modality inference, merge semantics |
+| [multimodal/operator-integration-guide.md](multimodal/operator-integration-guide.md) | Building and packaging multimodal operators, serving hook, demo pipeline |
+| [multimodal/conversion-retention-rules.md](multimodal/conversion-retention-rules.md) | 转化率/留存率 calculation rules and acceptance verification procedure |
+
 ## Editing docs and skills
 
 Skill content is edited **only** in `skills/canonical/`. The copies under

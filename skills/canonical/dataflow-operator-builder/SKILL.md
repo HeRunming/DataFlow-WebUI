@@ -120,6 +120,9 @@ Read:
 - `references/gotchas.md`
 - `references/acceptance-checklist.md`
 
+For multimodal operators (image / audio / video), also read:
+- `references/multimodal-contract.md`
+
 ### Step 2: Interview or Direct Spec
 
 - Interactive mode: follow `references/askuserquestion-rounds.md` strictly.
